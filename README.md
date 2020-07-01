@@ -1,2 +1,2 @@
-# jioushan.github.io
+# jsmsr.com
 JSMSR Index
