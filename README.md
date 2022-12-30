@@ -19,7 +19,7 @@ We provide services in the following locations
 | TwaiWan             |TaiBei    |
 | China               |Wuhan     |
 | China               |~~Hangzhou~~  |
-| China               |~~Nanjing~~   |
+| China               |~~ChangSha~~   |
 | China               |~~DEzhou~~    |
 |**North America**      |          |
 | United States       | Fremont  | 
@@ -41,9 +41,9 @@ AS-SET: AS-JSMSR
 ASN: 134478 
 
 ## LookGlass
-[lg.sgp.jsmsr.com](http://lg.sgp.jsmsr.com/)
+[lg.jsmsr.com](http://lg.jsmsr.com/)
 
-location:SGP
+location:SHA
 
 
 ## Internet Exchange Point「IX」
@@ -54,7 +54,7 @@ location:SGP
 |[IXP LEN](https://bgp.he.net/exchange/IXP%20LEN)|US|Fremont|2001:7f8:d0:5553:0:2:d4e:1|
 |[LL-IX](https://bgp.he.net/exchange/LL-IX)|PL|Haarlem|2001:678:4fc::92:192|
 |[KSKB-IX](https://bgp.he.net/exchange/KSKB-IX)|TW|Taipei City|2404:f4c0:f70e:1980::134:478|
-|[MoeIX FSN](https://bgp.he.net/exchange/MoeIX%20FSN)|DE|Falkenstein|2a0e:b107:5c3:f::6|
+|[MoeIX CSX](https://bgp.he.net/exchange/MoeIX%20CSX)|CN|ChangSha|2a0e:b107:5c3:a:0:a13:4478:1|
 
 
 ### For more data, please visit PeeringDB and review it yourself!
@@ -73,8 +73,9 @@ warn! ! !
 We currently do not accept downstream!
 
 If you need APNIC LIR service, please move to AS139317
+If you need RIPE LIR service, please move to [AS202888](https://t.me/@zh_210320)
 
-If you need to access Moe IX, please go to AS138211
+If you need to access [Moe IX](https://moeqing-network.gitbook.io/moeix/moeix-cgo/vm-wang-luo-shuo-ming), please go to AS138211
 
 If you have any questions and help please send a letter to [admin@jsmsr.com](mailto:admin@jsmsr.com)
 
@@ -84,5 +85,5 @@ Assignment of our [Address](https://docs.google.com/spreadsheets/u/0/d/1HfKHDhjW
 
 You can get IPV6 tunnel support by filling out this form! IPV6 tunnelbroker request [URL](https://forms.gle/sFqpNTaWgsFxX7jk6)
 
-# Jsmsr©2022
+# Jsmsr©2023
 
