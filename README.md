@@ -10,7 +10,7 @@ We provide services in the following locations
 | Area                |   City   |
 |---------------------|----------|
 | **Europe**              |          |   
-| Germany {DE}        |Dusseldorf|           
+| Germany {DE}        |~~Dusseldorf~~|           
 | Germany {DE}        |Frankfurt | 
 | Germany {DE}        |~~Falkenstein~~| 
 | **Asian**               |          | 
@@ -23,6 +23,9 @@ We provide services in the following locations
 | China               |~~DEzhou~~    |
 |**North America**      |          |
 | United States       | Fremont  | 
+| United States       |  Los Angeles  | 
+| United States       | Seattle  | 
+| United States       | San Jose  | 
 
 ## Peering
 We are open and interconnected, and you can interconnect with us through the IX we access.
