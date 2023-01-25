@@ -13,14 +13,15 @@ We provide services in the following locations
 | Germany {DE}        |~~Dusseldorf~~|           
 | Germany {DE}        |Frankfurt | 
 | Germany {DE}        |~~Falkenstein~~| 
+|Netherlands {NL}        |Amsterdam | 
 | **Asian**               |          | 
 | Singapore           |Singapore | 
 | HongKong            |Hong Kong |
 | TwaiWan             |TaiBei    |
 | China               |Wuhan     |
-| China               |~~Hangzhou~~  |
-| China               |~~ChangSha~~   |
-| China               |~~DEzhou~~    |
+| China               |Hangzhou  |
+| China               |ChangSha  |
+| China               |DEzhou    |
 |**North America**      |          |
 | United States       | Fremont  | 
 | United States       |  Los Angeles  | 
