@@ -58,7 +58,7 @@ location:SHA
 |[IXP LEN](https://bgp.he.net/exchange/IXP%20LEN)|US|Fremont|2001:7f8:d0:5553:0:2:d4e:1|
 |[LL-IX](https://bgp.he.net/exchange/LL-IX)|PL|Haarlem|2001:678:4fc::92:192|
 |[KSKB-IX](https://bgp.he.net/exchange/KSKB-IX)|TW|Taipei City|2404:f4c0:f70e:1980::134:478|
-|[MoeIX CSX](https://bgp.he.net/exchange/MoeIX%20CSX)|CN|ChangSha|2a0e:b107:5c3:a:0:a13:4478:1|
+|[MoeIX CSX](https://bgp.he.net/exchange/MoeIX%20CSX)|CN|ChangSha|2a0e:b107:5c3:a000:0:a13:4478:1|
 
 
 ### For more data, please visit PeeringDB and review it yourself!
@@ -74,7 +74,7 @@ Abuse:[abuse@jsmsr.com](mailto:abuse@jsmsr.com)
 ## More
 warn! ! !
 
-We currently do not accept downstream!
+
 
 If you need APNIC LIR service, please move to AS139317
 If you need RIPE LIR service, please move to [AS202888](https://t.me/@zh_210320)
