@@ -1,0 +1,52 @@
+site_name: Peer
+site_url: https://www.jsmsr.com/peer
+docs_dir : 'docs'
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+language : ja
+
+nav:
+    - JSMSR NetWork Service: index.md
+    - Jsmsr Experimental Network: as134478.md
+    - YI LI Unreachable Network: as200728.md
+    - Communities: Communities.md
+    - Peer: peer.md
+    - Contact : contact.md
+    - More : more.md
+    - About us : about.md
+    - Acknowledgement : Acknowledgement.md
+theme: lantana
+
+visible_search : true
+
+markdown_extensions:
+    - attr_list
+    - pymdownx.highlight:
+       anchor_linenums: true
+    - admonition
+    - pymdownx.arithmatex:
+       generic : true
+    - md_in_html
+    - pymdownx.details
+    - pymdownx.superfences:
+        custom_fences:
+          - name: mermaid
+            class: mermaid
+            format: !!python/name:pymdownx.superfences.fence_code_format
+    - pymdownx.snippets
+    - pymdownx.critic
+    - pymdownx.caret
+    - pymdownx.keys
+    - pymdownx.mark
+    - pymdownx.tilde
+    - pymdownx.emoji:
+        emoji_index: !!python/name:materialx.emoji.twemoji
+        emoji_generator: !!python/name:materialx.emoji.to_svg
+    - pymdownx.tasklist:
+        custom_checkbox: true
+    - pymdownx.magiclink
+    - pymdownx.striphtml
+    
+copyright : 'Copyright &copy; 2023 Jsmsr Network'
