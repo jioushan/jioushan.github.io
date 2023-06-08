@@ -27,10 +27,11 @@ jobs:
     - name: Build documentation
       run: |
         cd .github/workflows/
-        mkdocs build --clean
+        mkdocs build 
+        mkdocs gh-deploy --force
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         personal_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./.github/workflows/docs  # 构建生成的文档目录
+        publish_dir: ./site  # 构建生成的文档目录
