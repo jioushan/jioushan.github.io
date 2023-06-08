@@ -11,10 +11,10 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2.5.0  # 更新为支持 Node.js 16 的版本
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v2.4.0  # 更新为支持 Node.js 16 的版本
       with:
         python-version: 3.8  # 替换为您所需的 Python 版本
 
