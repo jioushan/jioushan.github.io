@@ -31,10 +31,9 @@ jobs:
         cd .github/workflows/
         mkdocs build --clean
 
-   - name: Deploy to GitHub Pages
+  - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         personal_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./site  # 构建生成的文档目录
-        publish_branch: master  # 部署到 master 分支
-        publish_dir_prefix: peer  # 目标目录的前缀
+        publish_dir: ./.github/workflows/site  # 构建生成的文档目录
+        publish_branch: gh-pages  # 部署到 gh-pages 分支
