@@ -33,4 +33,4 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         personal_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./peer  # 构建生成的文档目录
+        publish_dir: /peer  # 构建生成的文档目录
