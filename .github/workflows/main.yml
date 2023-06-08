@@ -27,7 +27,6 @@ jobs:
     - name: Build documentation
       run: |
         cd .github/workflows/
-        mkdocs build 
         mkdocs gh-deploy
 
     - name: Deploy to GitHub Pages
@@ -36,4 +35,4 @@ jobs:
         personal_token: ${{ secrets.GITHUB_TOKEN }}
         CONFIG_FILE: mkdocs.yml
         EXTRA_PACKAGES: build-base
-        publish_dir: ./.github/workflows/site  # 构建生成的文档目录
+        
