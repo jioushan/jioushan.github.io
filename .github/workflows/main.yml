@@ -26,6 +26,7 @@ jobs:
 
     - name: Build documentation
       run: |
+        cd $GITHUB_WORKSPACE
         mkdocs build --clean
 
     - name: Deploy to GitHub Pages
