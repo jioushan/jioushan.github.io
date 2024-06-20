@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 1rem;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #ddd;
+}
+
+main {
+    padding-top: 4rem;
+}
+
+section {
+    padding: 4rem 1rem;
+    margin: 2rem 0;
+    background-color: #f4f4f4;
+    max-width: 1200px;
+    margin: 2rem auto;
+}
+
+.home-section {
+    height: 75vh; /* 3/4 of the screen height */
+    background-image: url('data-center.jpg');
+    background-size: cover; /* 確保圖片覆蓋整個區塊 */
+    background-position: center; /* 使圖片居中顯示 */
+    background-repeat: no-repeat; /* 防止圖片重複 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#mapid {
+    height: 500px; /* 固定高度以適應地圖顯示 */
+    width: 100%;
+}
+
+#back-to-top {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    display: none;
+    transition: display 0.3s;
+}
+
+#back-to-top:hover {
+    background-color: #555;
+}

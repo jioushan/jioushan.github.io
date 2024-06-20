@@ -1,138 +1,68 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSMSR Network</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">JSMSR Network</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#servers">Servers</a></li>
+                    <li><a href="#map">Map</a></li>
+                    <li><a href="#lg">LG</a></li>
+                    <li><a href="#upstreams">Upstreams</a></li>
+                    <li><a href="#downstreams">Downstreams</a></li>
+                    <li><a href="#peers">Peers</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<html>
-	<head>
-		<title>Jsmsr Network | Jsmsr Experimental Network</title>
-		<meta charset="utf-8" />
-		<link rel="icon" href="https://www.jsmsr.com/assets/img/favicon.svg" type="image/x-icon">
-		<meta property="og:image" content="https://www.jsmsr.com/assets/img/favicon.svg">
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		<!-- Google tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139139682-4">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <main>
+        <section id="home" class="home-section">
+            <!-- Empty div for background image -->
+        </section>
+        <section id="servers">
+            <h1>Servers</h1>
+            <p>Information about our servers.</p>
+        </section>
+        <section id="map">
+            <h1>Map</h1>
+            <div id="mapid"></div>
+        </section>
+        <section id="lg">
+            <h1>LG</h1>
+            <p>Looking Glass service.</p>
+        </section>
+        <section id="upstreams">
+            <h1>Upstreams</h1>
+            <p>Upstream providers.</p>
+        </section>
+        <section id="downstreams">
+            <h1>Downstreams</h1>
+            <p>Downstream customers.</p>
+        </section>
+        <section id="peers">
+            <h1>Peers</h1>
+            <p>Our peers.</p>
+        </section>
+        <section id="about">
+            <h1>About</h1>
+            <p>About JSMSR Network.</p>
+        </section>
+    </main>
 
-  gtag('config', 'UA-139139682-4');
-</script>
-	</head>
-	<body class="is-preload">
+    <button id="back-to-top">Back to Top</button>
 
-		<!-- Page Wrapper -->
-			<div id="page-wrapper">
-
-				<!-- Wrapper -->
-					<div id="wrapper">
-
-						<!-- Panel (Banner) -->
-							<section class="panel banner right">
-								<div class="content color0 span-3-75">
-									<h1 class="major">Hey, You See<br />
-									 JSMSR</h1>
-									<p>JSMSR <strong>Full Meaning</strong>, Jsmsr Experimental Network. About it <a href="https://www.peeringdb.com/org/28213">AS134478 & AS199605</a>. </p>
-									<ul class="actions">
-										<li><a href="#first" class="button primary color1 circle icon solid fa-angle-right">Next</a></li>
-									</ul>
-								</div>
-								<div class="image filtered span-1-75" data-position="25% 25%">
-									<img src="images/pic01.jpg" alt="" />
-								</div>
-							</section>
-
-						<!-- Panel (Spotlight) -->
-							<section class="panel spotlight medium right" id="first">
-								<div class="content span-7">
-									<h2 class="major">Jsmsr Experimental Network</h2>
-									<p>Currently it is still an IPV6 only network. </p> 
-									<p>Its deploy our services in Europe, US West, East Asia!</p> 
-									<p>it provides some trivial services! </p>
-									<p>More <a href="https://peer.jsmsr.com/about/">about us</a>. </p>
-								</div>
-								<div class="image filtered tinted" data-position="top left">
-									<img src="images/pic02.jpg" alt="" />
-								</div>
-							</section>
-
-						<!-- Panel (Spotlight) -->
-							<section class="panel spotlight large left">
-								<div class="content span-5">
-									<h2 class="major">Tunnel service</h2>
-									<p>We help you transition from ipv4 to ipv6.</p>
-									<span>You can get IPV6 tunnel support by filling out this form!
-									</span> <a href="https://forms.gle/sFqpNTaWgsFxX7jk6">IPV6 tunnelbroker request</a>
-								</div>
-								<div class="image filtered tinted" data-position="top right">
-									<img src="images/pic03.jpg" alt="" />
-								</div>
-							</section>
-
-                        <!-- Panel (Spotlight) -->
-                            <section class="panel spotlight large left">
-	       						<div class="content span-5">
-									<h2 class="major">Peer</h2>
-									<p>We allow you to communicate with our peering by tunneling requests.</p>
-									<p>or IX with our peering.</p>
-									<p>Our peering is completely free, but you need to get in touch with us to configure the service together!</p>
-									<span>More about Peering 
-									</span> <a href="https://peer.jsmsr.com/">please click here</a>
-								</div>
-								<div class="image filtered tinted" data-position="top right">
-									<img src="images/gallery/fulls/06.jpg" alt="" />
-								</div>
-							</section>
-
-
-						<!-- Panel -->
-							<section class="panel color4-alt">
-								<div class="intro color4">
-									<h2 class="major">Contact</h2>
-									<p>Please contact us by email.</p>
-									<p>Support: admin@jsmsr.com</p>
-									<p>NOC: noc@jsmsr.com</p>
-									<p>Abuse:abuse@jsmsr.com</p>
-									<br><img src="assets/img/Nonbinary.png" style="height: 20px; vertical-align: middle;"><img src="assets/img/pride.svg" style="height: 20px; vertical-align: middle;"><img src="assets/img/Pride_Flag.png" style="height: 20px; vertical-align: middle;"></br> 
-								</div>
-								<div class="inner columns divided">
-									<div class="span-3-25">
-										<form method="post" action="#">
-											<div class="fields">
-												<div class="field half">
-													<label for="name">Name</label>
-													<input type="text" name="name" id="name" />
-												</div>
-												<div class="field half">
-													<label for="email">Email</label>
-													<input type="email" name="email" id="email" />
-												</div>
-												<div class="field">
-													<label for="message">Message</label>
-													<textarea name="message" id="message" rows="4"></textarea>
-												</div>
-											</div>
-											<ul class="actions">
-												<li><a href="mailto:admin@jsmsr.com" class="button">Send Message</a></li>
-											</ul>
-										</form>
-									</div>
-									<div class="span-1-5">
-										<ul class="contact-icons color1">
-											<li class="icon brands fa-twitter"><a href="https://twitter.com/jioushan182">@jioushan182</a></li>
-											<li class="icon brands fa-telegram"><a href="https://t.me/jsmsr_network">@JSMSR_Group</a></li>
-											<li class="icon brands fa-discord"><a href="https://discord.gg/Exr7vz7CCB">@jioushan#9163</a></li>
-											<li class="fa fa-database fa-fw"><a href="https://www.peeringdb.com/net/25544">PeeringDB</a></li>
-										</ul>
-									</div>
-								</div>
-							</section>
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/main.js"></script>
-			<script data-ad-client="ca-pub-5267663113337080" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-	</body>
+    <script src="script.js"></script>
+</body>
 </html>
