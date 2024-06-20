@@ -17,13 +17,12 @@
   
 
   
-    <title>Contact | Peer</title>
+  <title>Contact | Peer</title>
   
 
   
 
-  <link rel="stylesheet" href="../css/bootstrap.min.css" media="print">
-  <link rel="stylesheet" href="../css/bootstrap-dark.min.css" media="not print">
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/bootstrap-icons.min.css">
   <link rel="stylesheet" href="../css/default.min.css">
   <link rel="stylesheet" href="../css/vs.min.css">
@@ -96,6 +95,7 @@
   <div class="container">
     <main role="main" class="pb-3">
       <div class="row">
+        
         
     
     <div class="col-12 col-md-2 print-hide">
@@ -195,6 +195,7 @@
     
     
     <div class="d-flex justify-content-between">
+      
       <div>
         
         <a class="btn text-primary print-hide" href="../peer/" title="Peer"><i class="bi bi-chevron-left"></i></a>
@@ -203,6 +204,8 @@
         <a class="btn text-primary print-hide" href="../more/" title="More"><i class="bi bi-chevron-right"></i></a>
         
       </div>
+      
+      
       <div>
         <div>
           
@@ -217,16 +220,18 @@
           
           <a class="btn disabled print-hide"><i class="bi bi-pencil"></i></a>
           
+          
           <span class="dropdown print-hide">
             <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><button class="btn dropdown-item" onclick="share_to_twitter('Contact | Peer');"><i class="bi bi-twitter"></i>&nbsp;Twitter</button></li>
+              <li><button class="btn dropdown-item" onclick="share_to_twitter('Contact | Peer','');"><i class="bi bi-twitter"></i>&nbsp;Twitter</button></li>
               <li><button class="btn dropdown-item" onclick="share_to_facebook();"><i class="bi bi-facebook"></i>&nbsp;Facebook</button></li>
+              <li><button class="btn dropdown-item" onclick="share_to_line();"><i class="bi bi-line"></i>&nbsp;LINE</button></li>
+              <li><hr class="dropdown-divider"></li>
               <li><button class="btn dropdown-item" onclick="print_view();"><i class="bi bi-file-earmark-text"></i>&nbsp;埋込モードで表示</button></li>
-              <li><button class="btn dropdown-item" onclick="page_copy_btn_clicked(this);"><i class="bi bi-clipboard"></i>&nbsp;URLをコピー</button></li>
+              <li><button class="btn dropdown-item" id="page-url-copy-btn"><i class="bi bi-clipboard"></i>&nbsp;URLをコピー</button></li>
             </ul>
           </span>
-          
         </div>
       </div>
     </div>
@@ -245,9 +250,6 @@
       </div>
       <script src="../js/theme.js"></script>
       
-      <script>
-        linkToNewTab("https://www.jsmsr.com/peer/");
-      </script>
       
       
     <script async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -257,9 +259,6 @@
     <script async src="../search/main.js"></script>
       
       
-      <script>
-        afterload();
-      </script>
     </main>
   </div>
   

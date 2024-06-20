@@ -1,3 +1,4 @@
+
 .highlight {
     padding-top: 10px;
     margin-bottom: 10px;
@@ -6,6 +7,7 @@
 p code{
     padding : 5px;
 }
+
 .highlighttable .copybtn , .highlighttable .filename , .highlight .copybtn , .highlight .filename,.highlighttable tr , .highlight pre{
     padding-left: 10px;
     padding-right: 10px;
@@ -49,54 +51,83 @@ blockquote cite{
     text-align:right;
 }
 
-a[target="_blank"]:after{
-    font-family:bootstrap-icons;
-    content:'\F143';
-    font-size:0.7rem;
+a[target="_blank"]:not(.btn)
+{
+    text-decoration:underline;
+}
+
+.accordion{
+    position : relative;
+    padding: 0.5rem 0;
+    margin-bottom : 0.5rem;
 }
 
 svg{
     width: 100%;
 }
 
-.alert-heading:before{
+/*
+.accordion-button:before{
     font-family:bootstrap-icons;
     padding-right: 0.25em;
     font-size: 15px;
 }
+.note .accordion-button:before{
+    content: '\F272';
+}
+*/
+mark{
+    font-weight: bold;
+}
+.note .accordion-item
+{
+    --bs-accordion-active-color: var(--bs-primary-text-emphasis);
+    --bs-accordion-active-bg : var(--bs-primary-bg-subtle);
+    --bs-accordion-btn-focus-box-shadow : 0 0 0 0;
+}
 
-.note .alert-heading:before{
-    content:'\F26A';
+.abstract,.question .accordion-item
+{
+    --bs-accordion-active-bg : var(--bs-secondary-bg-subtle);
+    --bs-accordion-active-color: var(--bs-secondary-text-emphasis);
+    --bs-accordion-btn-focus-box-shadow : 0 0 0 0;
 }
-.abstract .alert-heading:before{
-    content:'\F3B8';
+
+.info .accordion-item
+{
+    --bs-accordion-active-bg : var(--bs-info-bg-subtle);
+    --bs-accordion-active-color: var(--bs-info-text-emphasis);
+    --bs-accordion-btn-focus-box-shadow : 0 0 0 0;
 }
-.info .alert-heading:before{
-    content:'\F430';
+.success .accordion-item
+{
+    --bs-accordion-active-bg : var(--bs-success-bg-subtle);
+    --bs-accordion-active-color: var(--bs-success-text-emphasis);
+    --bs-accordion-btn-focus-box-shadow : 0 0 0 0;
 }
-.tip .alert-heading:before{
-    content:'\F468';
+.warning,.tip,.bug .accordion-item
+{
+    --bs-accordion-active-bg : var(--bs-warning-bg-subtle);
+    --bs-accordion-active-color: var(--bs-warning-text-emphasis);
+    --bs-accordion-btn-focus-box-shadow : 0 0 0 0;
 }
-.success .alert-heading:before{
-    content:'\F272';
+.failure,.danger .accordion-item
+{
+    --bs-accordion-active-bg : var(--bs-danger-bg-subtle);
+    --bs-accordion-active-color: var(--bs-danger-text-emphasis);
+    --bs-accordion-btn-focus-box-shadow : 0 0 0 0;
 }
-.question .alert-heading:before{
-    content:'\F504';
+.example .accordion-item
+{
+    --bs-accordion-active-bg : var(--bs-dark-bg-subtle);
+    --bs-accordion-active-color: var(--bs-dark-text-emphasis);
+    --bs-accordion-btn-focus-box-shadow : 0 0 0 0;
 }
-.warning .alert-heading:before{
-    content:'\F33A';
-}
-.failure .alert-heading:before{
-    content:'\F622';
-}
-.danger .alert-heading:before{
-    content:'\F67B';
-}
-.bug .alert-heading:before{
-    content:'\F1DB';
-}
-.example .alert-heading:before{
-    content:'\F41F';
+.quote .accordion-item
+{
+    --bs-accordion-active-bg : var(--bs-light-bg-subtle);
+    --bs-accordion-active-color: var(--bs-light-text-emphasis);
+    --bs-accordion-btn-focus-box-shadow : 0 0 0 0;
 }
 
 @media print{
