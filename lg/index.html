@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSMSR Network</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Looking Glass - JSMSR Network</title>
+    <link rel="stylesheet" href="../styles.css"> <!-- 引用母站的樣式表 -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <link rel="icon" href="https://www.jsmsr.com/v3/assets/img/favicon.svg" type="image/x-icon">
@@ -16,10 +16,10 @@
             <div class="logo">JSMSR Network</div>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="https://www.jsmsr.com">Home</a></li>
+                    <li><a href="../index.html">Home</a></li> <!-- 返回母站首頁 -->
                     <li><a href="https://www.jsmsr.com/servers">Servers</a></li>
-                    <li><a href="#map">Map</a></li>
-                    <li><a href="https://www.jsmsr.com/lg">LG</a></li>
+                    <li><a href="https://www.jsmsr.com">Map</a></li>
+                    <li><a href="./index.html">LG</a></li> <!-- 子站首頁自身 -->
                     <li><a href="https://www.jsmsr.com/ix">IX</a></li>
                     <li><a href="https://peer.jsmsr.com">Peers</a></li>
                     <li><a href="https://peer.jsmsr.com/about">About</a></li>
@@ -28,37 +28,15 @@
         </div>
     </header>
 
-    <main>
-        <section id="home" class="home-section">
-            <!-- Empty div for background image -->
-        </section>
-        
-        <section id="map">
-            <h1>Map</h1>
-            <div id="mapid"></div>
-        </section>
-        <!-- 
-        <section id="upstreams">
-            <h1>Upstreams</h1>
-            <p>Upstream providers.</p>
-        </section>
-        <section id="downstreams">
-            <h1>Downstreams</h1>
-            <p>Downstream customers.</p>
-        </section>
-        <section id="peers">
-            <h1>Peers</h1>
-            <p>Our peers.</p>
-        </section>
-        <section id="about">
-            <h1>About</h1>
-            <p>About JSMSR Network.</p>
-        </section>
-    </main>
-            -->
-    <button id="back-to-top">Back to Top</button>
-
-    <script src="script.js"></script>
+    <section id="home" class="home-section">
+        <!-- Empty div for background image -->
+    </section>
+    <section id="lg">
+        <h1>Looking Glass</h1>
+        <div class="overlay">
+            <p>The website is under development. Please check back later or visit <a href="https://lg.jsmsr.com" target="_blank">https://lg.jsmsr.com</a>.</p>
+        </div>
+    </section>
     <script data-ad-client="ca-pub-5267663113337080" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <footer>
         <div class="container">
