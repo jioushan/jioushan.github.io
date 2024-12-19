@@ -1,5 +1,14 @@
 
+
+
+
+
+
+
+
+
 <!DOCTYPE html lang="ja">
+
 
 <head>
   <meta charset="utf-8">
@@ -14,7 +23,7 @@
   
 
   
-    <meta http-equiv="content-language" content="ja">
+  <meta http-equiv="content-language" content="ja">
   
   
 
@@ -24,268 +33,316 @@
 
   
 
-  <link rel="stylesheet" href="css/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="css/default.min.css">
-  <link rel="stylesheet" href="css/vs.min.css">
-  <link rel="stylesheet" href="css/theme.css">
   
   
-  
-  <script async>var base_url = '.';</script>
-  <script src="js/jquery-3.6.1.slim.min.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script async src="js/highlight.min.js"></script>
 
+<link rel="stylesheet" href="css/bootstrap-icons.min.css">
+<link rel="stylesheet" href="css/theme.css">
+
+
+<link rel="stylesheet" href="css/colors/auto.css">
+<link rel="stylesheet" href="css/highlight/default.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="css/highlight/monokai.css" media="(prefers-color-scheme: dark)">
+
+
+
+
+
+<script async>var base_url = '.';</script>
+<script src="js/jquery-3.6.1.slim.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script async src="js/highlight.min.js"></script>
+  
   
   
 </head>
-<body>
-  
-  
-    
-    <header>
-      <nav class="navbar navbar-expand-sm navbar-toggleable-sm  border-bottom box-shadow mb-3 ">
-        <div class="container">
-            <a class="navbar-brand text-body" asp-area="" href="/">
-              
-              
-                Peer
-              
-            </a>
-            <div class="print-hide">
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <div class="d-none d-md-flex input-group mb-3">
-                
-                    <input class="form-control" type="search" id="searchbox" accesskey="/" placeholder="Peerで検索" aria-label="検索" aria-describedby="search-btn"/>
-                    <button class="btn btn-outline-secondary" type="button" id="search-btn" onclick="search(false);">
-                        <i class="bi bi-search"></i>
-                    </button>
-                    
-                </div>
-            </div>
-            </div>
-        </div>
-    </nav>
-    <nav class="navbar border-bottom box-shadow mb-3 d-md-none print-hide">
-      <div class="container">
-          <div class="navbar-collapse d-flex">
-            <p>
-              <div class="d-flex input-group mb-3">
-                
-                <button class="btn btn-outline-secondary" onclick="toggle_nav(this);" type="button" data-bs-toggle="collapse" data-bs-target="#nav" title="ナビゲーションを表示"><i class="bi bi-book"></i></button>
-                
-                
-                <input class="form-control" type="search" id="searchbox_mobile" accesskey="/" placeholder="Peerで検索" aria-label="検索">
-                <button class="btn btn-outline-secondary" type="button" onclick="search(true);"><i class="bi bi-search"></i></button>
-                
-                
-                
-                <button class="btn btn-outline-secondary" onclick="toggle_toc(this);" type="button" data-bs-toggle="collapse" data-bs-target="#tol"><i class="bi bi-list-ul"></i></button>
-                
-                
-            </div>
-            </p>
+
+<body    <header>
+  <nav
+    class="navbar navbar-expand-sm navbar-toggleable-sm  border-bottom box-shadow mb-3 ">
+    <div class="container">
+      <a class="navbar-brand text-body" asp-area="" href=" /">
+        
+        
+        Peer
+        
+      </a>
+      <div class="print-hide">
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+          <div class="d-none d-md-flex input-group mb-3">
+            
+            <input class="form-control" type="search" id="searchbox" accesskey="/"
+              placeholder="Search in here" aria-label="Search"
+              aria-describedby="search-btn" />
+            <button class="btn btn-outline-secondary" type="button" id="search-btn" onclick="search(false);">
+              <i class="bi bi-search"></i>
+            </button>
+            
           </div>
+        </div>
       </div>
-    </nav>
+    </div>
+  </nav>
+  <nav class="navbar border-bottom box-shadow mb-3 d-md-none print-hide">
+    <div class="container">
+      <div class="navbar-collapse d-flex">
+        <p>
+        <div class="d-flex input-group mb-3">
+          
+          <button class="btn btn-outline-secondary" onclick="toggle_nav(this);" type="button" data-bs-toggle="collapse"
+            data-bs-target="#nav" title="Show Navigation"><i class="bi bi-book"></i></button>
+          
+          
+          <input class="form-control" type="search" id="searchbox_mobile" accesskey="/"
+            placeholder="Search in here" aria-label="Search">
+          <button class="btn btn-outline-secondary" type="button" onclick="search(true);"><i
+              class="bi bi-search"></i></button>
+          
+          
+          <button class="btn btn-outline-secondary" onclick="toggle_toc(this);" type="button" data-bs-toggle="collapse"
+            data-bs-target="#toc"><i class="bi bi-list-ul"></i></button>
+          
+        </div>
+        </p>
+      </div>
+    </div>
+  </nav>
   </header>
-    
+  
   
   
   
   <div class="container">
-    <main role="main" class="pb-3">
+    <div class="pb-3">
       <div class="row">
         
         
-    
-    <div class="col-12 col-md-2 print-hide">
-      <div class="collapse d-md-block text-nowrap" id="nav"  style="overflow-x:scroll;">
+        
+
+<div class="col-12 col-md-2 print-hide">
+    <div class="collapse d-md-block text-nowrap" id="nav" style="overflow-x:scroll;">
         <ul class="list-group list-group-flush">
-        
-        
-        <li class="list-group-item"><a class="text-decoration-none  text-body" href=".">JSMSR NetWork Service</a></li>
-        
-        
-        
-        <li class="list-group-item"><a class="text-decoration-none  text-muted" href="as134478/">Jsmsr Experimental Network</a></li>
-        
-        
-        
-        <li class="list-group-item"><a class="text-decoration-none  text-muted" href="as200728/">YI LI Unreachable Network</a></li>
-        
-        
-        
-        <li class="list-group-item"><a class="text-decoration-none  text-muted" href="Communities/">Communities</a></li>
-        
-        
-        
-        <li class="list-group-item"><a class="text-decoration-none  text-muted" href="peer/">Peer</a></li>
-        
-        
-        
-        <li class="list-group-item"><a class="text-decoration-none  text-muted" href="contact/">Contact</a></li>
-        
-        
-        
-        <li class="list-group-item"><a class="text-decoration-none  text-muted" href="more/">More</a></li>
-        
-        
-        
-        <li class="list-group-item"><a class="text-decoration-none  text-muted" href="about/">About us</a></li>
-        
-        
-        
-        <li class="list-group-item"><a class="text-decoration-none  text-muted" href="Acknowledgement/">Acknowledgement</a></li>
-        
-        
-      </ul>
-      </div>
+            
+            
+            <li class="list-group-item"><a
+                    class="text-decoration-none  text-body"
+                    href=".">JSMSR NetWork Service</a></li>
+            
+            
+            
+            <li class="list-group-item"><a
+                    class="text-decoration-none  text-muted"
+                    href="as134478/">Jsmsr Experimental Network</a></li>
+            
+            
+            
+            <li class="list-group-item"><a
+                    class="text-decoration-none  text-muted"
+                    href="as200728/">YI LI Unreachable Network</a></li>
+            
+            
+            
+            <li class="list-group-item"><a
+                    class="text-decoration-none  text-muted"
+                    href="Communities/">Communities</a></li>
+            
+            
+            
+            <li class="list-group-item"><a
+                    class="text-decoration-none  text-muted"
+                    href="peer/">Peer</a></li>
+            
+            
+            
+            <li class="list-group-item"><a
+                    class="text-decoration-none  text-muted"
+                    href="contact/">Contact</a></li>
+            
+            
+            
+            <li class="list-group-item"><a
+                    class="text-decoration-none  text-muted"
+                    href="more/">More</a></li>
+            
+            
+            
+            <li class="list-group-item"><a
+                    class="text-decoration-none  text-muted"
+                    href="about/">About us</a></li>
+            
+            
+            
+            <li class="list-group-item"><a
+                    class="text-decoration-none  text-muted"
+                    href="Acknowledgement/">Acknowledgement</a></li>
+            
+            
+        </ul>
     </div>
-    
-       
-    
-    
-    
-    <div class="col-12 col-md-2 order-md-3 print-hide">
-      <div class="collapse d-md-block text-nowrap" id="tol"  style="overflow-x:scroll;">
-        <span>目次</span>
-         <hr/>
+</div>
+        
+        
+        
+
+
+
+
+<div class="col-12 col-md-2 order-md-3 print-hide">
+  <div class="collapse d-md-block text-nowrap" id="toc" style="overflow-x:scroll;">
+    <span>In this article</span>
+    <hr />
+    <ul class="list-group list-group-flush">
+      
+      <li class="list-group-item"><a class="text-decoration-none text-muted" href="#as199605jsmsr-network">AS199605｜JsMsr Network</a>
+        
         <ul class="list-group list-group-flush">
-        
-        <li class="list-group-item"><a class="text-decoration-none text-muted" href="#as199605jsmsr-network" >AS199605｜JsMsr Network</a>
           
-            <ul class="list-group list-group-flush">
-            
-              
-    <li class="list-group-item"><a class="text-decoration-none text-muted" href="#graph-v6" >Graph V6</a>
-    
-    </li>
-
-            
-              
-    <li class="list-group-item"><a class="text-decoration-none text-muted" href="#organizations" >Organizations</a>
-    
-    </li>
-
-            
-              
-    <li class="list-group-item"><a class="text-decoration-none text-muted" href="#as-set" >AS-SET</a>
-    
-    </li>
-
-            
-              
-    <li class="list-group-item"><a class="text-decoration-none text-muted" href="#lookglass" >LookGlass</a>
-    
-    </li>
-
-            
-              
-    <li class="list-group-item"><a class="text-decoration-none text-muted" href="#our-upstream" >Our Upstream</a>
-    
-    </li>
-
-            
-              
-    <li class="list-group-item"><a class="text-decoration-none text-muted" href="#state" >State</a>
-    
-    </li>
-
-            
-              
-    <li class="list-group-item"><a class="text-decoration-none text-muted" href="#transit" >Transit</a>
-    
-    </li>
-
-            
-      </ul>
-          
-          </li>
+      <li class="list-group-item"><a class="text-decoration-none text-muted" href="#graph-v6">Graph V6</a>
         
-      </ul>
-      </div>
-    </div>
-    
-    
-    <div class="col-12 col-md-8 print-main">
+      </li>
       
-      <h1>JSMSR NetWork Service</h1>
+      <li class="list-group-item"><a class="text-decoration-none text-muted" href="#organizations">Organizations</a>
+        
+      </li>
       
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Peer</li>
+      <li class="list-group-item"><a class="text-decoration-none text-muted" href="#as-set">AS-SET</a>
         
-        
-        <li class="breadcrumb-item active" aria-current="page">JSMSR NetWork Service</li>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-      </ol>
-    </nav>
-    
-    
-    <div class="d-flex justify-content-between">
+      </li>
       
-      <div>
+      <li class="list-group-item"><a class="text-decoration-none text-muted" href="#lookglass">LookGlass</a>
+        
+      </li>
+      
+      <li class="list-group-item"><a class="text-decoration-none text-muted" href="#our-upstream">Our Upstream</a>
+        
+      </li>
+      
+      <li class="list-group-item"><a class="text-decoration-none text-muted" href="#state">State</a>
+        
+      </li>
+      
+      <li class="list-group-item"><a class="text-decoration-none text-muted" href="#transit">Transit</a>
+        
+      </li>
+      
+        </ul>
+        
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<main role="main" class="col-12 col-md-8 print-main">
+  
+  
+  <h1 >JSMSR NetWork Service</h1>
+  
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Peer</li>
+      
+      
+      <li class="breadcrumb-item active" aria-current="page">JSMSR NetWork Service</li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ol>
+  </nav>
+  
+  
+  <div class="container ml-0">
+    <div class="row">
+      
+      <div class="col-2 px-0" style="text-wrap: nowrap;">
         
         <a class="btn text-muted print-hide"><i class="bi bi-chevron-left"></i></a>
         
         
-        <a class="btn text-primary print-hide" href="as134478/" title="Jsmsr Experimental Network"><i class="bi bi-chevron-right"></i></a>
+        <a class="btn text-primary print-hide" href="as134478/" title="Jsmsr Experimental Network"><i
+            class="bi bi-chevron-right"></i></a>
         
       </div>
-      
-      
-      <div>
-        <div>
-          
-          
-          
-          
-          
-          
-          <button class="btn print-block" title="このページを印刷" onclick="window.print();"><i class="bi bi-printer"></i></button>
-          <button class="btn print-visible d-none" onclick="print_normal();" title="新しいタブで開く"><i class="bi bi-arrow-up-right-square"></i></button>
-          
-          
-          <a class="btn disabled print-hide"><i class="bi bi-pencil"></i></a>
-          
-          
-          <span class="dropdown print-hide">
-            <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><button class="btn dropdown-item" onclick="share_to_twitter('JSMSR NetWork Service | Peer','');"><i class="bi bi-twitter"></i>&nbsp;Twitter</button></li>
-              <li><button class="btn dropdown-item" onclick="share_to_facebook();"><i class="bi bi-facebook"></i>&nbsp;Facebook</button></li>
-              <li><button class="btn dropdown-item" onclick="share_to_line();"><i class="bi bi-line"></i>&nbsp;LINE</button></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><button class="btn dropdown-item" onclick="print_view();"><i class="bi bi-file-earmark-text"></i>&nbsp;埋込モードで表示</button></li>
-              <li><button class="btn dropdown-item" id="page-url-copy-btn"><i class="bi bi-clipboard"></i>&nbsp;URLをコピー</button></li>
-            </ul>
-          </span>
-        </div>
+      <div class="col px-0" style="text-align: right;">
+        
+        
+        
+        
+        
+        
+        <button class="btn print-visible d-none" onclick="print_normal();"
+          title="Open NewTab"><i class="bi bi-arrow-up-right-square"></i></button>
+      </div>
+      <div class="col-1 col-sm-2 px-0 print-hide" style="text-align: right;text-wrap: nowrap;">
+        
+        
+        <a class="btn disabled print-hide d-none d-sm-inline"><i class="bi bi-pencil"></i></a>
+        
+        
+        
+        <button class="btn print-block d-none d-lg-inline" title="Print this article"
+          onclick="window.print();"><i class="bi bi-printer"></i></button>
+        
+        <span class="dropdown print-hide">
+          <button class="btn btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+            aria-expanded="false"><i class="bi bi-list"></i></button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li>
+              <h6 class="dropdown-header">Share via</h6>
+            </li>
+            <li><button class="btn dropdown-item"
+                onclick="share_to_twitter('JSMSR NetWork Service | Peer','');"><i
+                  class="bi bi-twitter-x"></i>&nbsp;X.com</button></li>
+            <li><button class="btn dropdown-item" onclick="share_to_facebook();"><i
+                  class="bi bi-facebook"></i>&nbsp;Facebook</button></li>
+            <li><button class="btn dropdown-item" onclick="share_to_line();"><i
+                  class="bi bi-line"></i>&nbsp;LINE</button></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><button class="btn dropdown-item" onclick="window.print();"><i class="bi bi-printer"></i>&nbsp;Print</button></li>
+            <li><button class="btn dropdown-item" id="page-url-copy-btn"><i class="bi bi-clipboard"></i>&nbsp;Copy Url to clipboard</button></li>
+            <li>
+              
+              
+              <a class="btn dropdown-item disabled"><i class="bi bi-pencil"></i>&nbsp;Edit this article</a>
+              
+              
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            
+            <li><button class="btn dropdown-item" onclick="print_view();"><i
+                  class="bi bi-file-earmark-text"></i>&nbsp;View in EmbedMode</button></li>
+          </ul>
+        </span>
       </div>
     </div>
-    <hr/>
+  </div>
+  
+  <hr />
+  
+  <div >
     
-    
-      <h1 id="as199605jsmsr-network">AS199605｜JsMsr Network</h1>
+    <h1 id="as199605jsmsr-network">AS199605｜JsMsr Network</h1>
 <h2 id="graph-v6">Graph V6</h2>
 <p><img alt="" src="https://bgp.he.net/graphs/as199605-ipv6.svg" /></p>
 <h2 id="organizations">Organizations</h2>
@@ -366,29 +423,31 @@ Learn more about our services!</p>
 <p>Please fill out this <a href="https://forms.gle/sFqpNTaWgsFxX7jk6">form</a> </p>
 <p><a href="https://www.jsmsr.com/peer/Communities/">About Communities Control</a></p>
     
-    
+  </div>
+</main>
 
       </div>
-      </div>
-      <script src="js/theme.js"></script>
-      
-      
-      
+    </div>
+    <script src="js/theme.js"></script>
+    
+    
+    
     <script async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-      
+    
     <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      
+    
     <script async src="search/main.js"></script>
-      
-      
-    </main>
+    
+    
   </div>
+  </div>
+
   
   
   
   
-  
-  <footer class="border-top footer text-muted .position-absolute.bottom-0.start-50.translate-middle-x" style="padding-top:15px;">
+  <footer class="border-top footer text-muted .position-absolute.bottom-0.start-50.translate-middle-x"
+    style="padding-top:15px;">
     <div class="container">
       <div class="row">
         <div class="col-md">
@@ -402,25 +461,32 @@ Learn more about our services!</p>
   </footer>
   
   
+  
+  
+  
+  <div class="modal fade" id="searchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="searchModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg print-hide">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Search</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <input id="mkdocs-search-query" type="text" class="form-control"
+                        aria-label="Search" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div id="mkdocs-search-results">
+                    search-area-desc
+                </div>
 
-<div class="modal fade" id="searchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="searchModal" aria-hidden="true">
-  <div class="modal-dialog modal-lg print-hide">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="searchModalLabel">検索</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
-      </div>
-      <div class="modal-body">
-        <div class="input-group mb-3">
-          <input id="mkdocs-search-query" type="text" class="form-control" aria-label="検索" aria-describedby="inputGroup-sizing-default">
+            </div>
         </div>
-        <div id="mkdocs-search-results">
-          キーワードを入力して検索を始めましょう
-        </div>
-
-      </div>
     </div>
-  </div>
 </div>
+  
 </body>
+
 </html>
