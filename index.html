@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSMSR Network</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <link rel="icon" href="https://www.jsmsr.com/v3/assets/img/favicon.svg" type="image/x-icon">
-	<meta property="og:image" content="https://www.jsmsr.com/v3/assets/img/favicon.svg">
+    <meta property="og:image" content="https://www.jsmsr.com/v3/assets/img/favicon.svg">
 </head>
 <body>
     <header>
@@ -30,32 +30,19 @@
 
     <main>
         <section id="home" class="home-section">
-            <!-- Empty div for background image -->
+            <div class="banner-content">
+                <h1>JSMSR</h1>
+                <p>Network</p>
+                <a href="#map" class="btn">Check It</a>
+            </div>
         </section>
         
         <section id="map">
             <h1>Map</h1>
             <div id="mapid"></div>
         </section>
-        <!-- 
-        <section id="upstreams">
-            <h1>Upstreams</h1>
-            <p>Upstream providers.</p>
-        </section>
-        <section id="downstreams">
-            <h1>Downstreams</h1>
-            <p>Downstream customers.</p>
-        </section>
-        <section id="peers">
-            <h1>Peers</h1>
-            <p>Our peers.</p>
-        </section>
-        <section id="about">
-            <h1>About</h1>
-            <p>About JSMSR Network.</p>
-        </section>
     </main>
-            -->
+
     <button id="back-to-top">Back to Top</button>
 
     <script src="script.js"></script>
@@ -63,7 +50,11 @@
     <footer>
         <div class="container">
             <p>&copy; 2024 JSMSR Network. All rights reserved.</p>
-            <br><img src="v3/assets/img/Nonbinary.png" style="height: 20px; vertical-align: middle;"><img src="v3/assets/img/pride.svg" style="height: 20px; vertical-align: middle;"><img src="v3/assets/img/Pride_Flag.png" style="height: 20px; vertical-align: middle;"></br> 
+            <div class="flags">
+                <img src="v3/assets/img/Nonbinary.png" alt="Nonbinary Flag" class="flag">
+                <img src="v3/assets/img/pride.svg" alt="Pride Flag" class="flag">
+                <img src="v3/assets/img/Pride_Flag.png" alt="Additional Pride Flag" class="flag">
+            </div>
         </div>
     </footer>
 </body>

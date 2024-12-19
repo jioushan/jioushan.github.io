@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const links = document.querySelectorAll("nav ul li a");
     const backToTopButton = document.getElementById("back-to-top");
 
+    // 平滑滚动到页面部分
     links.forEach(link => {
         link.addEventListener("click", function(e) {
             e.preventDefault();
@@ -11,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
+    // 滚动到顶部按钮显示/隐藏逻辑
     window.addEventListener("scroll", function() {
         if (window.scrollY > 300) {
             backToTopButton.style.display = "block";
