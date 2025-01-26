@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: '/peer/',
+  //base: '/peer/',
   lang: 'en-US',
   title: "JSMSR Network | Peer",
   description: "JSMSR Network Server",
