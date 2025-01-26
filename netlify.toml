@@ -1,23 +1,19 @@
 [build]
   base = "peer"
   command = """
-    echo "Current Directory: $(pwd)"
-    echo "Listing files:"
     ls -l
     npm install
     npm run docs:build
   """
-  publish = "/docs/.vitepress/dist"
+  publish = "/peer/docs/.vitepress/dist"
 
 [context.deploy-preview]
   command = """
-    echo "Deploy Preview - Current Directory: $(pwd)"
-    echo "Listing files:"
     ls -l
     npm install
     npm run docs:build
   """
-  publish = "/docs/.vitepress/dist"
+  publish = "/peer/docs/.vitepress/dist"
 
 [build.environment]
   NODE_VERSION = "18.x"
