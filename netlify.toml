@@ -1,14 +1,12 @@
 [build]
   base = "peer"
   command = """
-    npm install
     npm run docs:build
   """
   publish = "/peer/docs/.vitepress/dist"
 
 [context.deploy-preview]
   command = """
-    npm install
     npm run docs:build
   """
   publish = "/peer/docs/.vitepress/dist"
