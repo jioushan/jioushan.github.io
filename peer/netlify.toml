@@ -1,13 +1,13 @@
 [build]
-  base = "peer"  # 设置为 peer 目录
+  base = ""
   command = """
     echo "Current Directory: $(pwd)"
     echo "Listing files:"
     ls -l
-    npm install  # 安装依赖
-    npm run docs:build  # 构建命令
+    npm install
+    npm run docs:build
   """
-  publish = "peer/docs/.vitepress/dist"
+  publish = "/docs/.vitepress/dist"
 
 [context.deploy-preview]
   command = """
@@ -17,7 +17,7 @@
     npm install
     npm run docs:build
   """
-  publish = "peer/docs/.vitepress/dist"
+  publish = "/docs/.vitepress/dist"
 
 [build.environment]
   NODE_VERSION = "18.x"
