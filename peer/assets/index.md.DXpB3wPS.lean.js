@@ -1,0 +1,1 @@
+import{_ as a,c as e,ag as r,o}from"./chunks/framework.-a8jReyC.js";const c=JSON.parse('{"title":"AS12198","description":"","frontmatter":{},"headers":[],"relativePath":"index.md","filePath":"index.md"}'),d={name:"index.md"};function n(i,t,s,l,h,p){return o(),e("div",null,t[0]||(t[0]=[r("",26)]))}const u=a(d,[["render",n]]);export{c as __pageData,u as default};
