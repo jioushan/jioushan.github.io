@@ -1,7 +1,6 @@
 [build]
   base = "peer"
   command = """
-    ls -l
     npm install
     npm run docs:build
   """
@@ -9,7 +8,6 @@
 
 [context.deploy-preview]
   command = """
-    ls -l
     npm install
     npm run docs:build
   """
