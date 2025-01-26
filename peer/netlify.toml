@@ -12,4 +12,4 @@
   publish = "/peer/docs/.vitepress/dist"
 
 [build.environment]
-  NODE_VERSION = "18.x"
+  NODE_VERSION = "18.17.1"
