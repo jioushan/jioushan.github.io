@@ -3,13 +3,13 @@
   command = """
     npm run docs:build
   """
-  publish = "/peer/docs/.vitepress/dist"
+  publish = "/docs/.vitepress/dist"
 
 [context.deploy-preview]
   command = """
     npm run docs:build
   """
-  publish = "/peer/docs/.vitepress/dist"
+  publish = "/docs/.vitepress/dist"
 
 [build.environment]
-  NODE_VERSION = "18.17.1"
+  NODE_VERSION = "23.6.1"
