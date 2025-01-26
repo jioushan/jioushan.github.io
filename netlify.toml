@@ -1,12 +1,18 @@
 [build]
   base = "peer"
   command = """
+    rm -rf node_modules
+    npm install @rollup/rollup-linux-x64-gnu
+    npm install
     npm run docs:build
   """
   publish = "/docs/.vitepress/dist"
 
 [context.deploy-preview]
   command = """
+    rm -rf node_modules
+    npm install @rollup/rollup-linux-x64-gnu
+    npm install
     npm run docs:build
   """
   publish = "/docs/.vitepress/dist"
