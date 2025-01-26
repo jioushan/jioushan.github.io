@@ -1,16 +1,24 @@
 [build]
   # 设置 Base Directory 为 peer 目录
   base = "peer"
-  # 设置 Build Command，执行 VitePress 的构建
-  command = "npm run docs:build"
+  # 先执行 ls 命令来查看当前路径，然后执行 npm install，最后执行 VitePress 构建命令
+  command = """
+    ls -l
+    cd peer
+    npm install
+    npm run docs:build
+  """
   # 设置 Publish Directory 为构建后的文件目录
   publish = "peer/docs/.vitepress/dist"
 
 [build.environment]
-  # 设置 Node.js 版本为 18.x
   NODE_VERSION = "18.x"
 
 [context.deploy-preview]
-  # 部署预览环境的配置（如果需要）
-  command = "npm run docs:build"
+  command = """
+    ls -l
+    cd peer
+    npm install
+    npm run docs:build
+  """
   publish = "peer/docs/.vitepress/dist"
