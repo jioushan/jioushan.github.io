@@ -1,32 +1,12 @@
 
-# AS134478｜Jsmsr Experimental Network｜JEN 
+# AS12198｜JSMSR Network 
 
 
 ## Graph V6
-![](https://bgp.he.net/graphs/as134478-ipv6.svg)
+![](https://bgp.he.net/graphs/as12198-ipv6.svg)
 
 ## Location 
 We provide services in the following locations
-| Area                |   City   |
-|---------------------|----------|
-| **Europe**              |          |   
-| Germany {DE}        |~~Dusseldorf~~|           
-| Germany {DE}        |Frankfurt | 
-| Germany {DE}        |~~Falkenstein~~| 
-|Netherlands {NL}        |Amsterdam | 
-| **Asian**               |          | 
-| Singapore           |Singapore | 
-| HongKong            |Hong Kong |
-| TwaiWan             |TaiBei    |
-| China               |Wuhan     |
-| China               |Hangzhou  |
-| China               |ChangSha  |
-| China               |DEzhou    |
-|**North America**      |          |
-| United States       | Fremont  | 
-| United States       |  Los Angeles  | 
-| United States       | Seattle  | 
-| United States       | San Jose  | 
 
 ## Peering
 We are open and interconnected, and you can interconnect with us through the IX we access.
@@ -34,7 +14,7 @@ But we need to specify contract requirements or Loa power of attorney.
 
 ### !Notethat
 
-we currently only support you in our EU/US/SGP regions
+we currently only support you in our /US/Asia regions
 
 access our network
 For other regions, please send an email to [admin@jsmsr.com](mailto:admin@jsmsr.com)
@@ -42,12 +22,14 @@ For other regions, please send an email to [admin@jsmsr.com](mailto:admin@jsmsr.
 ###  You can find information about us at
 AS-SET: AS-JSMSR
 
-ASN: 134478 
+Whois:RIPE,ARIN
+
+ASN: 12198
 
 ## LookGlass
 [lg.jsmsr.com](http://lg.jsmsr.com/)
 
-location:SHA
+location:Null;
 
 
 ## Internet Exchange Point「IX」
@@ -89,5 +71,5 @@ Assignment of our [Address](https://docs.google.com/spreadsheets/u/0/d/1HfKHDhjW
 
 You can get IPV6 tunnel support by filling out this form! IPV6 tunnelbroker request [URL](https://forms.gle/sFqpNTaWgsFxX7jk6)
 
-# Jsmsr©2023
+# JSMSR©2019-2025
 
