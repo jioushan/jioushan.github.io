@@ -45,7 +45,7 @@ Actions:
 ## Example:
 
 ```
-bgp_large_community.add((199605, 1019, 0));
+bgp_large_community.add((12198, 1019, 0));
 
 #You will export upstream from our main cross-region location
 ```
