@@ -21,7 +21,7 @@ Wosie:ARIN,RIPE
 ASN: 12198
 
 ## LookGlass
-plz wating;
+[MTR LookingGlass](https://lg.jsmsr.com)
 
 location:Asia
 
@@ -37,6 +37,7 @@ location:Asia
 | AS209533       | iFog GmbH  |
 | AS393577      | Tritan Development  |
 | AS134835      | Starry Network Limited  |
+| AS59105      | Home NOC Operators Group  |
 
 JSMSR Network Operates our Global network
 
@@ -55,8 +56,9 @@ We provide IPT (Only IPV6) at our following locations
 | Country             |   Area        |    Location    |
 |---------------------|---------------|----------------|
 | Asia                | HongKong      |    HongKong    |
-| Asia                | Japan         |  OOSaka        |
+| Asia                | Japan         |  OSaka         |
 | United States       | Missouri      | Kansas City    |
+| United States       | California    | San José       |
 | Singapore           | -----------   | -----------    |
 
 Please fill out this [form](https://forms.gle/sFqpNTaWgsFxX7jk6) 
