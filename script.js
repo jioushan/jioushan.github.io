@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const links = document.querySelectorAll("nav ul li a");
     const backToTopButton = document.getElementById("back-to-top");
 
-    // 平滑滚动
     links.forEach(link => {
         link.addEventListener("click", function(e) {
             e.preventDefault();
@@ -12,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // 显示/隐藏回到顶部按钮
     window.addEventListener("scroll", function() {
         backToTopButton.style.display = window.scrollY > 300 ? "block" : "none";
     });
@@ -24,14 +22,15 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // 初始化地图
-    const map = L.map('mapid').setView([20, 0], 2);
+    // 初始化地图，使用 worldCopyJump 并将中心点偏向亚洲
+    const map = L.map('mapid', {
+        worldCopyJump: true
+    }).setView([20, 160], 2); // 注意这里经度偏向东经，地图右边是美洲
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // 更新后的节点列表（已删除Kansas，新增Kansas City, Osaka, Okinawa）
     const locations = [
         { coords: [37.3382, -121.8863], name: "San José", info: "San José Node" },
         { coords: [22.3193, 114.1694], name: "Hong Kong", info: "Hong Kong Route" },
@@ -51,15 +50,13 @@ document.addEventListener("DOMContentLoaded", function() {
             .bindPopup(`<b>${loc.name}</b><br>${loc.info}`);
     });
 
-    // 名称映射方便连接
     const locMap = {};
     locations.forEach(loc => { locMap[loc.name] = loc.coords; });
 
-    // 更新后的连线路径
     const routes = [
         [locMap["Helsinki"], locMap["Frankfurt"]],
-        [locMap["Hong Kong"], locMap["Amsterdam"]],
         [locMap["Amsterdam"], locMap["Frankfurt"]],
+        [locMap["Amsterdam"], locMap["Singapore"]], // ✅ 新增连线
         [locMap["Hong Kong"], locMap["Taipei"]],
         [locMap["Hong Kong"], locMap["Singapore"]],
         [locMap["San José"], locMap["Tokyo"]],
@@ -72,6 +69,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     routes.forEach(route => {
         const polyline = L.polyline(route, { color: 'blue' }).addTo(map);
-        map.fitBounds(polyline.getBounds());
+        map.fitBounds(polyline.getBounds(), { padding: [20, 20] });
     });
 });
