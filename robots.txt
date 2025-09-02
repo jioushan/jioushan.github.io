@@ -1,3 +1,6 @@
-https://www.jsmsr.com
-
+https://www.jsmsr.com/
+https://blog.jsmsr.com/
 https://peer.jsmsr.com/
+https://www.jsmsr.com/ix/
+https://peer.jsmsr.com/about/
+https://geofeed.jsmsr.com/geofeeds.csv
