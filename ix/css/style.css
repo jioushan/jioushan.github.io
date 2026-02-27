@@ -1,84 +1,303 @@
-/* Reset */
+:root {
+    /* Light Mode Variables */
+    --bg-color: #f5f5f7;
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --text-main: #1d1d1f;
+    --text-dim: #86868b;
+    --accent: #0071e3;
+    --glass-border: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] {
+    --bg-color: #000000;
+    --card-bg: rgba(28, 28, 30, 0.7);
+    --text-main: #f5f5f7;
+    --text-dim: #a1a1a6;
+    --accent: #0a84ff;
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: background 0.3s, color 0.3s;
 }
 
 body {
-    font-family: 'Noto Sans JP', sans-serif;
-    line-height: 1.6;
-    background-color: #f8f8f8;
-    color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 磨砂玻璃效果 */
+.glass {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
 }
 
 .container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 100px 20px;
 }
 
-header {
+/* 导航 */
+.glass-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: var(--card-bg);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.nav-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    align-items: center;
+}
+
+.lang-switch button {
+    background: none;
+    border: none;
+    color: var(--text-main);
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 15px;
+    font-weight: 500;
+}
+
+/* Hero Section */
+.hero {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
 }
 
-header h1.zh {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 2.5rem;
+.hero h1 {
+    font-size: 48px;
     font-weight: 700;
-    margin-bottom: 10px;
+    letter-spacing: -0.5px;
 }
 
-header h1.small.en {
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 400;
+.subtitle {
+    color: var(--text-dim);
+    font-size: 20px;
+    margin-top: 10px;
 }
 
-section {
-    margin-bottom: 30px;
+/* 卡片样式 */
+.card {
+    padding: 30px;
+    margin-bottom: 24px;
 }
 
-h2 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
-h2 span {
-    font-size: 0.8em;
-    font-weight: 400;
-}
-
-.section-content {
-    margin-bottom: 15px;
-}
-
-.section-content p {
-    margin-bottom: 10px;
+/* 表格样式 */
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
 }
 
 .peertable {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 15px;
-}
-
-.peertable th, .peertable td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
 }
 
 .peertable th {
-    background-color: #f2f2f2;
+    text-align: left;
+    color: var(--text-dim);
+    font-weight: 500;
+    padding: 12px;
+    border-bottom: 1px solid var(--glass-border);
 }
 
-.mono {
-    font-family: 'Source Code Pro', monospace;
-    font-size: 0.9em;
-    color: #666;
+.peertable td {
+    padding: 12px;
+    border-bottom: 1px solid var(--glass-border);
+    font-family: "SF Mono", monospace;
+    font-size: 14px;
+}
+
+.badge {
+    background: rgba(52, 199, 89, 0.2);
+    color: #34c759;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+/* 按钮 */
+.btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 16px;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+/* 悬浮切换 */
+.theme-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    border: none;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    cursor: pointer;
+    font-size: 20px;
+}
+
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 32px; }
+}
+
+/* 连接项网格布局 */
+.config-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.config-item {
+    background: rgba(128, 128, 128, 0.1);
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 14px;
+    border: 1px solid var(--glass-border);
+}
+
+.note {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* 状态标签样式 */
+.badge {
+    padding: 4px 10px;
+    border-radius: 100px; /* 胶囊形状 */
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* 在线状态：绿色 */
+.status-on {
+    background: rgba(52, 199, 89, 0.15);
+    color: #34c759;
+}
+
+/* 离线/禁用状态：灰色 */
+.status-off {
+    background: rgba(142, 142, 147, 0.15);
+    color: #8e8e93;
+}
+
+/* 响应式调整 */
+@media (max-width: 600px) {
+    .config-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* 特殊边框样式 */
+.border-warning {
+    border: 1px solid rgba(255, 159, 10, 0.5) !important;
+}
+
+/* 赞助商标签样式 */
+.sponsor-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: rgba(0, 113, 227, 0.1);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.sponsor-tag:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.mono-text {
+    font-family: "SF Mono", "Menlo", monospace;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.specs {
+    margin-top: 10px;
+    padding-left: 20px;
+    color: var(--text-dim);
+}
+
+/* PeeringDB 链接样式 */
+.pdb-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.pdb-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--accent);
+}
+
+/* 页脚邮件样式 */
+footer {
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid var(--glass-border);
+}
+
+footer p {
+    margin-bottom: 8px;
+}
+
+.mail-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.mail-link:hover {
+    text-decoration: underline;
 }
