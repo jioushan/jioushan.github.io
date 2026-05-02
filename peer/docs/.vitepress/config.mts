@@ -8,7 +8,7 @@ export default defineConfig({
   description: "JSMSR Network Server",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: 'favicon.svg',
+    logo: '/favicon.svg',
 
     nav: [
       { text: 'Index', link: 'index.md' },
