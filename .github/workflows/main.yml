@@ -24,15 +24,16 @@ jobs:
         pip install mkdocs mkdocs-material  # 安装 MkDocs 和所需的主题
         pip install lantana
 
-    - name: Build documentation
-      run: |
-        cd .github/workflows/
-        mkdocs build --clean
+    # 已禁用：MkDocs 已弃用，peer 站点已迁移到 VitePress (见 peer.yml)
+    # - name: Build documentation
+    #   run: |
+    #     cd .github/workflows/
+    #     mkdocs build --clean
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        personal_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./.github/workflows/site  # 构建生成的文档目录
-        publish_branch: gh-pages  # 部署到 gh-pages 分支
+    # - name: Deploy to GitHub Pages
+    #   uses: peaceiris/actions-gh-pages@v3
+    #   with:
+    #     personal_token: ${{ secrets.GITHUB_TOKEN }}
+    #     publish_dir: ./.github/workflows/site  # 构建生成的文档目录
+    #     publish_branch: gh-pages  # 部署到 gh-pages 分支
         
