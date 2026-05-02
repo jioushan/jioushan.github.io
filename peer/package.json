@@ -3,7 +3,7 @@
     "vitepress": "^1.6.3"
   },
   "scripts": {
-    "gen-version": "sh scripts/gen-version.sh",
+    "gen-version": "bash scripts/gen-version.sh",
     "docs:dev": "npm run gen-version && vitepress dev docs",
     "docs:build": "npm run gen-version && vitepress build docs",
     "docs:preview": "vitepress preview docs"
