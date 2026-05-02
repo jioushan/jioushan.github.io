@@ -2,3 +2,4 @@ node_modules/
 .DS_Store
 peer/docs/.vitepress/dist/
 peer/docs/.vitepress/cache/
+peer/docs/public/version.json

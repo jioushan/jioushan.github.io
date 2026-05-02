@@ -30,14 +30,17 @@ jobs:
       working-directory: peer
       run: npm ci
 
+    - name: Generate version info
+      run: |
+        mkdir -p peer/docs/public
+        echo '{"commit":"${{ steps.commit.outputs.sha_short }}","built_at":"$(date -u +%Y-%m-%dT%H:%M:%SZ)"}' > peer/docs/public/version.json
+
     - name: Build VitePress
       working-directory: peer
       run: npm run docs:build
 
-    - name: Add CNAME and version info
-      run: |
-        echo "peer.jsmsr.com" > peer/docs/.vitepress/dist/CNAME
-        echo '{"commit":"${{ steps.commit.outputs.sha_short }}","built_at":"$(date -u +%Y-%m-%dT%H:%M:%SZ)"}' > peer/docs/.vitepress/dist/version.json
+    - name: Add CNAME
+      run: echo "peer.jsmsr.com" > peer/docs/.vitepress/dist/CNAME
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
