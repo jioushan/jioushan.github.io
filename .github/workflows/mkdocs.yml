@@ -1,52 +1,38 @@
-site_name: Peer
-site_url: https://www.jsmsr.com/peer
-docs_dir : 'docs'
-extra_javascript:
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+name: Deploy to GitHub Pages
 
-language : ja
+on:
+  push:
+    branches:
+      - master  # 部署主分支，您可以更改为其他分支名
 
-nav:
-    - JSMSR NetWork Service: index.md
-    - Jsmsr Experimental Network: as134478.md
-    - YI LI Unreachable Network: as200728.md
-    - Communities: Communities.md
-    - Peer: peer.md
-    - Contact : contact.md
-    - More : more.md
-    - About us : about.md
-    - Acknowledgement : Acknowledgement.md
-theme: lantana
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
 
-visible_search : true
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2.5.0  # 更新为支持 Node.js 16 的版本
 
-markdown_extensions:
-    - attr_list
-    - pymdownx.highlight:
-       anchor_linenums: true
-    - admonition
-    - pymdownx.arithmatex:
-       generic : true
-    - md_in_html
-    - pymdownx.details
-    - pymdownx.superfences:
-        custom_fences:
-          - name: mermaid
-            class: mermaid
-            format: !!python/name:pymdownx.superfences.fence_code_format
-    - pymdownx.snippets
-    - pymdownx.critic
-    - pymdownx.caret
-    - pymdownx.keys
-    - pymdownx.mark
-    - pymdownx.tilde
-    - pymdownx.emoji:
-        emoji_index: !!python/name:materialx.emoji.twemoji
-        emoji_generator: !!python/name:materialx.emoji.to_svg
-    - pymdownx.tasklist:
-        custom_checkbox: true
-    - pymdownx.magiclink
-    - pymdownx.striphtml
-    
-copyright : 'Copyright &copy; 2025 Jsmsr Network'
+    - name: Set up Python
+      uses: actions/setup-python@v2   # 更新为支持 Node.js 16 的版本
+      with:
+        python-version: 3.8  # 替换为您所需的 Python 版本
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install mkdocs mkdocs-material  # 安装 MkDocs 和所需的主题
+        pip install lantana
+
+    # 已禁用：MkDocs 已弃用，peer 站点已迁移到 VitePress (见 peer.yml)
+    # - name: Build documentation
+    #   run: |
+    #     cd .github/workflows/
+    #     mkdocs build --clean
+
+    # - name: Deploy to GitHub Pages
+    #   uses: peaceiris/actions-gh-pages@v3
+    #   with:
+    #     personal_token: ${{ secrets.GITHUB_TOKEN }}
+    #     publish_dir: ./.github/workflows/site  # 构建生成的文档目录
+    #     publish_branch: gh-pages  # 部署到 gh-pages 分支

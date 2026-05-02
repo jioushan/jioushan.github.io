@@ -15,6 +15,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Get commit info
+      id: commit
+      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
@@ -30,8 +34,10 @@ jobs:
       working-directory: peer
       run: npm run docs:build
 
-    - name: Add CNAME
-      run: echo "peer.jsmsr.com" > peer/docs/.vitepress/dist/CNAME
+    - name: Add CNAME and version info
+      run: |
+        echo "peer.jsmsr.com" > peer/docs/.vitepress/dist/CNAME
+        echo '{"commit":"${{ steps.commit.outputs.sha_short }}","built_at":"$(date -u +%Y-%m-%dT%H:%M:%SZ)"}' > peer/docs/.vitepress/dist/version.json
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
@@ -39,3 +45,4 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: peer/docs/.vitepress/dist
         publish_branch: gh-pages-peer
+        commit_message: 'deploy: ${{ steps.commit.outputs.sha_short }}'
