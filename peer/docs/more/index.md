@@ -1,15 +1,12 @@
 # JSMSR Network｜More
 ## More
 
-If you need APNIC LIR service, please move to AS139317
+If you need APNIC LIR service, RIPE LIR service, Please contact us.
 
 
 If you have any questions and help please send a letter to [admin@jsmsr.com](mailto:admin@jsmsr.com)
 
-We will reply you within 1-5 working days
-
-Assignment of our [Address](https://docs.google.com/spreadsheets/u/0/d/1HfKHDhjWjBOkK28L1klU8EViNjf-0-G0oSaknUNHdic/htmlview)
-Assignment of our [Address](https://docs.google.com/spreadsheets/u/0/d/1eOgWb9gLoAvIrmhPKp4NOo6mLrm0yrNI5df2LQfmpE4/htmlview)
+We will reply you within 1-3working days
 We used [Address] Geofeed:(https://geofeed.jsmsr.com/geofeeds.csv)
 
 You can get IPV6 tunnel support by filling out this form! IPV6 tunnelbroker request [URL](https://forms.gle/sFqpNTaWgsFxX7jk6)
@@ -24,6 +21,10 @@ Network Transit to T1, we start from 1U
 Location: HongKong, Tokyo
 
 
-Please contact us [Mail](mailto:admin@jsmsr.com)
-Please explain your purpose and I believe we will have a pleasant conversation.
-[telegram](https://t.me/JSMSR)
+
+## Contact us 
+
+You can contact us through our [ticket](https://web.ticket.jsmsr.com) system or via [Email](mailto:admin@jsmsr.com) or [telegram](https://t.me/JSMSR).
+
+I believe we will have a pleasant business.
+
