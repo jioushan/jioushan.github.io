@@ -30,11 +30,6 @@ jobs:
       working-directory: peer
       run: npm ci
 
-    - name: Generate version info
-      run: |
-        mkdir -p peer/docs/public
-        echo '{"commit":"${{ steps.commit.outputs.sha_short }}","built_at":"$(date -u +%Y-%m-%dT%H:%M:%SZ)"}' > peer/docs/public/version.json
-
     - name: Build VitePress
       working-directory: peer
       run: npm run docs:build
