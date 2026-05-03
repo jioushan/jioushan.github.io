@@ -181,188 +181,203 @@ function initializeScrollEffects() {
     });
 }
 
-// OpenStreetMap initialization
+// Mapbox GL JS initialization
 function initializeMap() {
-    // 检查是否存在地图容器
     if (!document.getElementById('mapid')) return;
-    
-    // 初始化地图，使用 worldCopyJump 并将中心点偏向亚洲
-    const map = L.map('mapid', {
-        worldCopyJump: true,
-        zoomControl: true,
-        scrollWheelZoom: true
-    }).setView([20, 160], 2); // 注意这里经度偏向东经，地图右边是美洲
 
-    // 添加OpenStreetMap瓦片层
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 18,
-        noWrap: false
-    }).addTo(map);
-    
+    mapboxgl.accessToken = 'pk.eyJ1IjoieWVrb25nIiwiYSI6ImNrdjh5YjZ3eDI4bGcyb3FwMnJsbjU1eGIifQ.X3K-02pS0vANQ8IZuN8DPQ';
+
+    const map = new mapboxgl.Map({
+        container: 'mapid',
+        style: 'mapbox://styles/mapbox/dark-v11',
+        center: [140, 20],
+        zoom: 2,
+        projection: 'mercator'
+    });
+
+    map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
     // Real JSMSR Network nodes data
     const networkNodes = [
-        { code: 'NRT', name: 'Tokyo', country: 'Japan', lat: 35.6762, lng: 139.6503, 
+        { code: 'NRT', name: 'Tokyo', country: 'Japan', lat: 35.6762, lng: 139.6503,
           providers: ['BBIX', 'Softbank'], type: 'main' },
-        { code: 'OSA', name: 'Osaka', country: 'Japan', lat: 34.6937, lng: 135.5023, 
+        { code: 'OSA', name: 'Osaka', country: 'Japan', lat: 34.6937, lng: 135.5023,
           providers: ['OPTAGE', 'NTT', 'KDDI', 'IIJ'], type: 'main' },
-        { code: 'TPE', name: 'Taipei', country: 'Taiwan', lat: 25.0330, lng: 121.5654, 
+        { code: 'TPE', name: 'Taipei', country: 'Taiwan', lat: 25.0330, lng: 121.5654,
           providers: ['MoeDove', 'HE'], type: 'pop' },
-        { code: 'HKG', name: 'Hong Kong', country: 'Hong Kong', lat: 22.3193, lng: 114.1694, 
+        { code: 'HKG', name: 'Hong Kong', country: 'Hong Kong', lat: 22.3193, lng: 114.1694,
           providers: ['HKIX', 'EQIX'], type: 'main' },
-        { code: 'SGP', name: 'Singapore', country: 'Singapore', lat: 1.3521, lng: 103.8198, 
+        { code: 'SGP', name: 'Singapore', country: 'Singapore', lat: 1.3521, lng: 103.8198,
           providers: ['Telia1299', 'CSL', 'EQIX'], type: 'main' },
-        { code: 'SJC', name: 'San Jose', country: 'USA', lat: 37.3382, lng: -121.8863, 
+        { code: 'SJC', name: 'San Jose', country: 'USA', lat: 37.3382, lng: -121.8863,
           providers: ['HE'], type: 'pop' },
-        { code: 'FMT', name: 'Fremont', country: 'USA', lat: 37.5485, lng: -121.9886, 
+        { code: 'FMT', name: 'Fremont', country: 'USA', lat: 37.5485, lng: -121.9886,
           providers: ['HE'], type: 'main' },
-        { code: 'AMS', name: 'Amsterdam', country: 'Netherlands', lat: 52.3676, lng: 4.9041, 
+        { code: 'AMS', name: 'Amsterdam', country: 'Netherlands', lat: 52.3676, lng: 4.9041,
           providers: ['GTT', 'Cogent', 'HE', 'Telia1299', 'Liberty'], type: 'main' },
-        { code: 'FRA', name: 'Frankfurt', country: 'Germany', lat: 50.1109, lng: 8.6821, 
+        { code: 'FRA', name: 'Frankfurt', country: 'Germany', lat: 50.1109, lng: 8.6821,
           providers: ['HE'], type: 'pop' },
-        { code: 'MCI', name: 'Kansas City', country: 'USA', lat: 39.0997, lng: -94.5786, 
+        { code: 'MCI', name: 'Kansas City', country: 'USA', lat: 39.0997, lng: -94.5786,
           providers: ['HE', 'Cogent', 'KCIX', 'SIX SEA'], type: 'main' }
     ];
-    
+
     // Real network connections with latency
     const connections = [
-        { from: 'NRT', to: 'OSA', latency: '8ms', active: true },
-        { from: 'OSA', to: 'TPE', latency: '35ms', active: true },
-        { from: 'TPE', to: 'HKG', latency: '8ms', active: true },
-        { from: 'SGP', to: 'AMS', latency: '180ms', active: true },
-        { from: 'AMS', to: 'FRA', latency: '15ms', active: true },
-        { from: 'FRA', to: 'MCI', latency: '120ms', active: true },
-        { from: 'SJC', to: 'FMT', latency: '5ms', active: true },
-        { from: 'FMT', to: 'OSA', latency: '120ms', active: true },
-        { from: 'SGP', to: 'HKG', latency: '25ms', active: true },
-        { from: 'SGP', to: 'OSA', latency: '85ms', active: true },
-        { from: 'TPE', to: 'OSA', latency: '40ms', active: true },
-        { from: 'AMS', to: 'SGP', latency: '180ms', active: true },
-        { from: 'MCI', to: 'FRA', latency: '110ms', active: true },
-        { from: 'MCI', to: 'SJC', latency: '45ms', active: true }
+        { from: 'NRT', to: 'OSA', latency: '8ms' },
+        { from: 'OSA', to: 'TPE', latency: '35ms' },
+        { from: 'TPE', to: 'HKG', latency: '8ms' },
+        { from: 'SGP', to: 'AMS', latency: '180ms' },
+        { from: 'AMS', to: 'FRA', latency: '15ms' },
+        { from: 'FRA', to: 'MCI', latency: '120ms' },
+        { from: 'SJC', to: 'FMT', latency: '5ms' },
+        { from: 'FMT', to: 'OSA', latency: '120ms' },
+        { from: 'SGP', to: 'HKG', latency: '25ms' },
+        { from: 'SGP', to: 'OSA', latency: '85ms' },
+        { from: 'TPE', to: 'OSA', latency: '40ms' },
+        { from: 'AMS', to: 'SGP', latency: '180ms' },
+        { from: 'MCI', to: 'FRA', latency: '110ms' },
+        { from: 'MCI', to: 'SJC', latency: '45ms' }
     ];
-    
-    // 创建自定义图标 - 纯锚点样式
-    function createCustomIcon(type) {
-        let color, size;
-        switch(type) {
-            case 'main':
-                color = '#4ecdc4';
-                size = 16;
-                break;
-            case 'pop':
-                color = '#45b7d1';
-                size = 12;
-                break;
-            default:
-                color = '#45b7d1';
-                size = 12;
+
+    const nodeMap = {};
+    networkNodes.forEach(n => { nodeMap[n.code] = n; });
+
+    function createCurve(from, to) {
+        const mid = [(from[0] + to[0]) / 2, (from[1] + to[1]) / 2];
+        const dx = to[0] - from[0], dy = to[1] - from[1];
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const curve = Math.min(dist * 0.15, 20);
+        mid[0] += -dy * 0.001 * curve;
+        mid[1] += dx * 0.001 * curve;
+        const pts = [];
+        for (let i = 0; i <= 50; i++) {
+            const t = i / 50;
+            pts.push([
+                Math.pow(1-t,2)*from[0] + 2*(1-t)*t*mid[0] + t*t*to[0],
+                Math.pow(1-t,2)*from[1] + 2*(1-t)*t*mid[1] + t*t*to[1]
+            ]);
         }
-        
-        return L.divIcon({
-            className: 'custom-marker',
-            html: `<div style="
-                background-color: ${color};
-                width: ${size}px;
-                height: ${size}px;
-                border-radius: 50%;
-                border: 2px solid white;
-                box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-                cursor: pointer;
-                transition: transform 0.2s ease;
-            " 
-            onmouseover="this.style.transform='scale(1.3)'" 
-            onmouseout="this.style.transform='scale(1)'"></div>`,
-            iconSize: [size + 4, size + 4],
-            iconAnchor: [(size + 4)/2, (size + 4)/2]
-        });
+        return pts;
     }
-    
-    // 添加节点到地图
-    const markers = {};
-    networkNodes.forEach(node => {
-        const marker = L.marker([node.lat, node.lng], {
-            icon: createCustomIcon(node.type)
-        }).addTo(map);
-        
-        // 创建弹出窗口内容
-        const connectionsInfo = connections
-            .filter(conn => conn.from === node.code || conn.to === node.code)
-            .map(conn => {
-                const targetCode = conn.from === node.code ? conn.to : conn.from;
-                const targetNode = networkNodes.find(n => n.code === targetCode);
-                return `<li>${targetNode.name} (${conn.latency})</li>`;
+
+    map.on('load', function() {
+        // Build connection lines as GeoJSON
+        const lineFeatures = connections.map(conn => {
+            const a = nodeMap[conn.from], b = nodeMap[conn.to];
+            if (!a || !b) return null;
+            return {
+                type: 'Feature',
+                properties: { from: conn.from, to: conn.to, latency: conn.latency },
+                geometry: { type: 'LineString', coordinates: createCurve([a.lng, a.lat], [b.lng, b.lat]) }
+            };
+        }).filter(Boolean);
+
+        map.addSource('connections', { type: 'geojson', data: { type: 'FeatureCollection', features: lineFeatures } });
+        map.addLayer({
+            id: 'connection-lines',
+            type: 'line',
+            source: 'connections',
+            paint: {
+                'line-color': '#4ecdc4',
+                'line-width': 1.5,
+                'line-opacity': 0.6,
+                'line-dasharray': [3, 2]
+            }
+        });
+
+        // Build node points as GeoJSON
+        const nodeFeatures = networkNodes.map(node => ({
+            type: 'Feature',
+            properties: {
+                code: node.code, name: node.name, country: node.country,
+                type: node.type, providers: node.providers.join(', ')
+            },
+            geometry: { type: 'Point', coordinates: [node.lng, node.lat] }
+        }));
+
+        map.addSource('nodes', { type: 'geojson', data: { type: 'FeatureCollection', features: nodeFeatures } });
+
+        // Outer glow
+        map.addLayer({
+            id: 'node-glow',
+            type: 'circle',
+            source: 'nodes',
+            paint: {
+                'circle-radius': 10,
+                'circle-color': '#4ecdc4',
+                'circle-opacity': 0.15
+            }
+        });
+
+        // Main node circles
+        map.addLayer({
+            id: 'node-circles',
+            type: 'circle',
+            source: 'nodes',
+            paint: {
+                'circle-radius': ['case', ['==', ['get', 'type'], 'main'], 7, 5],
+                'circle-color': ['case', ['==', ['get', 'type'], 'main'], '#4ecdc4', '#45b7d1'],
+                'circle-stroke-width': 2,
+                'circle-stroke-color': '#ffffff',
+                'circle-stroke-opacity': 0.9
+            }
+        });
+
+        // Node labels
+        map.addLayer({
+            id: 'node-labels',
+            type: 'symbol',
+            source: 'nodes',
+            layout: {
+                'text-field': ['get', 'code'],
+                'text-size': 11,
+                'text-offset': [0, 1.5],
+                'text-anchor': 'top',
+                'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Regular']
+            },
+            paint: {
+                'text-color': '#ffffff',
+                'text-halo-color': 'rgba(0,0,0,0.7)',
+                'text-halo-width': 1
+            }
+        });
+
+        // Popup on click
+        map.on('click', 'node-circles', function(e) {
+            const p = e.features[0].properties;
+            const nodeConns = connections.filter(c => c.from === p.code || c.to === p.code);
+            const connHtml = nodeConns.map(c => {
+                const target = c.from === p.code ? c.to : c.from;
+                const targetNode = nodeMap[target];
+                return '<li>' + targetNode.name + ' (' + c.latency + ')</li>';
             }).join('');
-        
-        const popupContent = `
-            <div style="min-width: 200px;">
-                <h3 style="margin: 0 0 10px 0; color: #333;">${node.code} - ${node.name}</h3>
-                <p style="margin: 5px 0;"><strong>Country:</strong> ${node.country}</p>
-                <p style="margin: 5px 0;"><strong>Type:</strong> ${node.type}</p>
-                <p style="margin: 5px 0;"><strong>Providers:</strong> ${node.providers.join(', ')}</p>
-                ${connectionsInfo ? `
-                    <p style="margin: 10px 0 5px 0;"><strong>Connections:</strong></p>
-                    <ul style="margin: 0; padding-left: 20px;">${connectionsInfo}</ul>
-                ` : ''}
-            </div>
-        `;
-        
-        marker.bindPopup(popupContent);
-        markers[node.code] = marker;
-    });
-    
-    // 添加连接线
-    connections.forEach(conn => {
-        const fromNode = networkNodes.find(n => n.code === conn.from);
-        const toNode = networkNodes.find(n => n.code === conn.to);
-        
-        if (fromNode && toNode) {
-            const polyline = L.polyline([
-                [fromNode.lat, fromNode.lng],
-                [toNode.lat, toNode.lng]
-            ], {
-                color: '#4ecdc4',
-                weight: 3,
-                opacity: 0.7,
-                dashArray: '10, 5'
-            }).addTo(map);
-            
-            // 添加连接线弹出窗口
-            polyline.bindPopup(`
-                <div style="text-align: center;">
-                    <strong>${fromNode.name} ⟷ ${toNode.name}</strong><br>
-                    <span style="color: #4ecdc4; font-weight: bold;">${conn.latency}</span>
-                </div>
-            `);
-        }
-    });
-    
-    // 添加图例
-    const legend = L.control({position: 'bottomright'});
-    legend.onAdd = function(map) {
-        const div = L.DomUtil.create('div', 'legend');
-        div.style.cssText = `
-            background: white;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            font-size: 12px;
-            line-height: 18px;
-        `;
-        div.innerHTML = `
-            <h4 style="margin: 0 0 8px 0;">Node Types</h4>
-            <div><span style="color: #4ecdc4;">●</span> Main Node</div>
-            <div><span style="color: #45b7d1;">●</span> PoP Node</div>
-        `;
-        return div;
-    };
-    legend.addTo(map);
-    
-    // 响应式处理
-    window.addEventListener('resize', function() {
-        setTimeout(function() {
-            map.invalidateSize();
-        }, 100);
+
+            const html = '<div style="min-width:200px;">' +
+                '<h3 style="margin:0 0 10px 0;color:#333;">' + p.code + ' - ' + p.name + '</h3>' +
+                '<p style="margin:5px 0;"><strong>Country:</strong> ' + p.country + '</p>' +
+                '<p style="margin:5px 0;"><strong>Type:</strong> ' + p.type + '</p>' +
+                '<p style="margin:5px 0;"><strong>Providers:</strong> ' + p.providers + '</p>' +
+                (connHtml ? '<p style="margin:10px 0 5px 0;"><strong>Connections:</strong></p><ul style="margin:0;padding-left:20px;">' + connHtml + '</ul>' : '') +
+                '</div>';
+
+            new mapboxgl.Popup({ offset: 15 })
+                .setLngLat(e.features[0].geometry.coordinates)
+                .setHTML(html)
+                .addTo(map);
+        });
+
+        // Cursor style
+        map.on('mouseenter', 'node-circles', function() { map.getCanvas().style.cursor = 'pointer'; });
+        map.on('mouseleave', 'node-circles', function() { map.getCanvas().style.cursor = ''; });
+
+        // Legend
+        const legend = document.createElement('div');
+        legend.className = 'mapboxgl-ctrl mapboxgl-ctrl-group';
+        legend.style.cssText = 'padding:10px;background:rgba(15,20,30,0.9);border-radius:8px;font-size:12px;line-height:20px;color:#fff;';
+        legend.innerHTML = '<div style="font-weight:bold;margin-bottom:4px;">Node Types</div>' +
+            '<div><span style="color:#4ecdc4;">●</span> Main Node</div>' +
+            '<div><span style="color:#45b7d1;">●</span> PoP Node</div>';
+        document.getElementById('mapid').appendChild(legend);
     });
 }
 
