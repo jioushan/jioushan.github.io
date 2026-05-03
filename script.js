@@ -586,25 +586,95 @@ function initializeStats() {
     statNumbers.forEach(stat => observer.observe(stat));
 }
 
-// Particle system
+// Particle system with interactive ripple
 function initializeParticles() {
-    const particlesContainer = document.getElementById('particles');
-    if (!particlesContainer) return;
-    
-    const particleCount = 50;
-    
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        
-        // Random position and animation delay
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        particle.style.animationDelay = Math.random() * 3 + 's';
-        particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        
-        particlesContainer.appendChild(particle);
+    const canvas = document.getElementById('particles');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
     }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const count = 80;
+    const particles = [];
+    for (let i = 0; i < count; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            ox: 0, oy: 0,
+            r: Math.random() * 2 + 1,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3,
+            alpha: Math.random() * 0.5 + 0.2
+        });
+    }
+    particles.forEach(p => { p.ox = p.x; p.oy = p.y; });
+
+    const mouse = { x: -9999, y: -9999, active: false };
+
+    function onMove(e) {
+        const rect = canvas.getBoundingClientRect();
+        const src = e.touches ? e.touches[0] : e;
+        mouse.x = src.clientX - rect.left;
+        mouse.y = src.clientY - rect.top;
+        mouse.active = true;
+    }
+    function onLeave() { mouse.active = false; mouse.x = -9999; mouse.y = -9999; }
+
+    canvas.style.pointerEvents = 'auto';
+    canvas.addEventListener('mousemove', onMove);
+    canvas.addEventListener('touchmove', onMove, { passive: true });
+    canvas.addEventListener('mouseleave', onLeave);
+    canvas.addEventListener('touchend', onLeave);
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (const p of particles) {
+            if (mouse.active) {
+                const dx = p.x - mouse.x;
+                const dy = p.y - mouse.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 120) {
+                    const force = (120 - dist) / 120 * 2;
+                    p.vx += (dx / dist) * force * 0.3;
+                    p.vy += (dy / dist) * force * 0.3;
+                }
+            }
+            p.vx += (p.ox - p.x) * 0.01;
+            p.vy += (p.oy - p.y) * 0.01;
+            p.vx *= 0.96;
+            p.vy *= 0.96;
+            p.x += p.vx;
+            p.y += p.vy;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255,255,255,' + p.alpha + ')';
+            ctx.fill();
+        }
+        // draw lines between nearby particles
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 100) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = 'rgba(255,255,255,' + (0.15 * (1 - dist / 100)) + ')';
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(draw);
+    }
+    draw();
 }
 
 // Back to top functionality

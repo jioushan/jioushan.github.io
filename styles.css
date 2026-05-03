@@ -206,7 +206,7 @@ header .container {
     overflow: hidden;
 }
 
-.particles {
+#particles {
     position: absolute;
     top: 0;
     left: 0;
