@@ -50,7 +50,7 @@
                 <h1 class="animate-text">JSMSR</h1>
                 <p class="animate-text">Network</p>
                 <p class="subtitle animate-text">Professional Network Infrastructure Provider</p>
-                <a href="#map" class="btn animate-text">Check It</a>
+                <a href="https://web.ticket.jsmsr.com" class="btn animate-text" target="_blank" rel="noopener">Contact Us</a>
             </div>
             <div class="scroll-indicator">
                 <div class="mouse">
@@ -163,6 +163,13 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+        fetch('https://api.github.com/repos/jioushan/jioushan.github.io/commits?per_page=1')
+            .then(function(r){return r.json()})
+            .then(function(d){if(d[0])document.getElementById('footer-commit').textContent=d[0].sha.substring(0,7)})
+            .catch(function(){});
+    </script>
     <script data-ad-client="ca-pub-5267663113337080" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <footer>
         <div class="container">
@@ -186,7 +193,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 JSMSR Network. All rights reserved.</p>
+                <p>&copy; <span id="footer-year"></span> JSMSR Network. All rights reserved. | <span id="footer-commit"></span></p>
                 <div class="flags">
                     <img src="v3/assets/img/Nonbinary.png" alt="Nonbinary Flag" class="flag">
                     <img src="v3/assets/img/pride.svg" alt="Pride Flag" class="flag">
