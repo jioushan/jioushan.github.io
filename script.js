@@ -185,7 +185,7 @@ function initializeScrollEffects() {
 function initializeMap() {
     if (!document.getElementById('mapid')) return;
 
-    mapboxgl.accessToken = 'pk.eyJ1IjoieWVrb25nIiwiYSI6ImNrdjh5YjZ3eDI4bGcyb3FwMnJsbjU1eGIifQ.X3K-02pS0vANQ8IZuN8DPQ';
+    mapboxgl.accessToken = 'pk.eyJ1IjoiamlvdXNoYW4iLCJhIjoiY21vcTN0ZWp6MXhhYjJybmNnNmEwa2ZwbyJ9.VpuJK_3oT4w-2qKM3DY_xw';
 
     const map = new mapboxgl.Map({
         container: 'mapid',
