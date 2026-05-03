@@ -187,17 +187,22 @@ function initializeMap() {
 
     mapboxgl.accessToken = 'pk.eyJ1IjoiamlvdXNoYW4iLCJhIjoiY21vcTN0ZWp6MXhhYjJybmNnNmEwa2ZwbyJ9.VpuJK_3oT4w-2qKM3DY_xw';
 
+    function getMapStyle() {
+        return document.documentElement.getAttribute('data-theme') === 'dark'
+            ? 'mapbox://styles/mapbox/dark-v11'
+            : 'mapbox://styles/mapbox/light-v11';
+    }
+
     const map = new mapboxgl.Map({
         container: 'mapid',
-        style: 'mapbox://styles/mapbox/dark-v11',
-        center: [140, 20],
-        zoom: 2,
+        style: getMapStyle(),
+        center: [140, 25],
+        zoom: 2.2,
         projection: 'mercator'
     });
 
     map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 
-    // Real JSMSR Network nodes data
     const networkNodes = [
         { code: 'NRT', name: 'Tokyo', country: 'Japan', lat: 35.6762, lng: 139.6503,
           providers: ['BBIX', 'Softbank'], type: 'main' },
@@ -207,40 +212,27 @@ function initializeMap() {
           providers: ['MoeDove', 'HE'], type: 'pop' },
         { code: 'HKG', name: 'Hong Kong', country: 'Hong Kong', lat: 22.3193, lng: 114.1694,
           providers: ['HKIX', 'EQIX'], type: 'main' },
-        { code: 'SGP', name: 'Singapore', country: 'Singapore', lat: 1.3521, lng: 103.8198,
-          providers: ['Telia1299', 'CSL', 'EQIX'], type: 'main' },
         { code: 'SJC', name: 'San Jose', country: 'USA', lat: 37.3382, lng: -121.8863,
           providers: ['HE'], type: 'pop' },
-        { code: 'FMT', name: 'Fremont', country: 'USA', lat: 37.5485, lng: -121.9886,
-          providers: ['HE'], type: 'main' },
-        { code: 'AMS', name: 'Amsterdam', country: 'Netherlands', lat: 52.3676, lng: 4.9041,
-          providers: ['GTT', 'Cogent', 'HE', 'Telia1299', 'Liberty'], type: 'main' },
-        { code: 'FRA', name: 'Frankfurt', country: 'Germany', lat: 50.1109, lng: 8.6821,
-          providers: ['HE'], type: 'pop' },
         { code: 'MCI', name: 'Kansas City', country: 'USA', lat: 39.0997, lng: -94.5786,
-          providers: ['HE', 'Cogent', 'KCIX', 'SIX SEA'], type: 'main' }
+          providers: ['HE', 'Cogent', 'KCIX'], type: 'main' }
     ];
 
-    // Real network connections with latency
     const connections = [
-        { from: 'NRT', to: 'OSA', latency: '8ms' },
-        { from: 'OSA', to: 'TPE', latency: '35ms' },
-        { from: 'TPE', to: 'HKG', latency: '8ms' },
-        { from: 'SGP', to: 'AMS', latency: '180ms' },
-        { from: 'AMS', to: 'FRA', latency: '15ms' },
-        { from: 'FRA', to: 'MCI', latency: '120ms' },
-        { from: 'SJC', to: 'FMT', latency: '5ms' },
-        { from: 'FMT', to: 'OSA', latency: '120ms' },
-        { from: 'SGP', to: 'HKG', latency: '25ms' },
-        { from: 'SGP', to: 'OSA', latency: '85ms' },
-        { from: 'TPE', to: 'OSA', latency: '40ms' },
-        { from: 'AMS', to: 'SGP', latency: '180ms' },
-        { from: 'MCI', to: 'FRA', latency: '110ms' },
-        { from: 'MCI', to: 'SJC', latency: '45ms' }
+        { from: 'HKG', to: 'TPE', latency: '12ms' },
+        { from: 'HKG', to: 'NRT', latency: '50ms' },
+        { from: 'OSA', to: 'NRT', latency: '7ms' },
+        { from: 'TPE', to: 'NRT', latency: '33ms' },
+        { from: 'OSA', to: 'SJC', latency: '100ms' },
+        { from: 'SJC', to: 'MCI', latency: '50ms' }
     ];
 
     const nodeMap = {};
     networkNodes.forEach(n => { nodeMap[n.code] = n; });
+
+    function getNodeConns(code) {
+        return connections.filter(c => c.from === code || c.to === code);
+    }
 
     function createCurve(from, to) {
         const mid = [(from[0] + to[0]) / 2, (from[1] + to[1]) / 2];
@@ -260,8 +252,104 @@ function initializeMap() {
         return pts;
     }
 
-    map.on('load', function() {
-        // Build connection lines as GeoJSON
+    // Sidebar
+    const sidebarContent = document.getElementById('sidebar-content');
+    let activeNode = null;
+
+    function renderNodeList() {
+        if (!sidebarContent) return;
+        let html = '';
+        networkNodes.forEach(node => {
+            html += '<div class="node-item" data-code="' + node.code + '">' +
+                '<div class="node-dot ' + node.type + '"></div>' +
+                '<div class="node-item-info">' +
+                '<div class="node-item-code">' + node.code + '</div>' +
+                '<div class="node-item-name">' + node.name + ', ' + node.country + '</div>' +
+                '</div></div>';
+        });
+        sidebarContent.innerHTML = html;
+
+        sidebarContent.querySelectorAll('.node-item').forEach(el => {
+            el.addEventListener('click', function() {
+                selectNode(this.getAttribute('data-code'));
+            });
+        });
+    }
+
+    function selectNode(code) {
+        activeNode = code;
+        const node = nodeMap[code];
+        if (!node) return;
+
+        map.flyTo({ center: [node.lng, node.lat], zoom: 4, duration: 1200 });
+
+        const nodeConns = getNodeConns(code);
+        let connHtml = '';
+        nodeConns.forEach(c => {
+            const targetCode = c.from === code ? c.to : c.from;
+            const target = nodeMap[targetCode];
+            connHtml += '<div class="conn-item" data-from="' + c.from + '" data-to="' + c.to + '">' +
+                '<span class="conn-target">' + targetCode + ' - ' + target.name + '</span>' +
+                '<span class="conn-latency">' + c.latency + '</span></div>';
+        });
+
+        sidebarContent.innerHTML =
+            '<div class="node-detail">' +
+            '<button class="back-btn" id="map-back-btn">&larr; Back</button>' +
+            '<div class="node-detail-header">' +
+            '<span class="node-detail-title">' + code + ' - ' + node.name + '</span>' +
+            '<span class="node-detail-badge ' + node.type + '">' + node.type + '</span></div>' +
+            '<div class="node-detail-row"><strong>Country:</strong> ' + node.country + '</div>' +
+            '<div class="node-detail-row"><strong>Providers:</strong> ' + node.providers.join(', ') + '</div>' +
+            '<div class="node-detail-row" style="margin-top:10px;"><strong>Connections:</strong></div>' +
+            '<ul class="conn-list">' + connHtml + '</ul></div>';
+
+        document.getElementById('map-back-btn').addEventListener('click', function() {
+            activeNode = null;
+            renderNodeList();
+        });
+
+        sidebarContent.querySelectorAll('.conn-item').forEach(el => {
+            el.addEventListener('mouseenter', function() {
+                const from = this.getAttribute('data-from');
+                const to = this.getAttribute('data-to');
+                highlightConnection(from, to, true);
+            });
+            el.addEventListener('mouseleave', function() {
+                const from = this.getAttribute('data-from');
+                const to = this.getAttribute('data-to');
+                highlightConnection(from, to, false);
+            });
+        });
+    }
+
+    function highlightConnection(from, to, active) {
+        if (!map.getLayer('connection-lines')) return;
+        const lineColor = active ? '#ffffff' : '#4ecdc4';
+        const lineWidth = active ? 3 : 1.5;
+        const lineOpacity = active ? 1 : 0.6;
+        map.setPaintProperty('connection-lines', 'line-color', [
+            'case',
+            ['all', ['==', ['get', 'from'], from], ['==', ['get', 'to'], to]],
+            lineColor,
+            ['all', ['==', ['get', 'from'], to], ['==', ['get', 'to'], from]],
+            lineColor,
+            '#4ecdc4'
+        ]);
+        map.setPaintProperty('connection-lines', 'line-width', [
+            'case',
+            ['all', ['==', ['get', 'from'], from], ['==', ['get', 'to'], to]],
+            lineWidth,
+            ['all', ['==', ['get', 'from'], to], ['==', ['get', 'to'], from]],
+            lineWidth,
+            1.5
+        ]);
+    }
+
+    renderNodeList();
+
+    // Map layers
+    function addMapLayers() {
         const lineFeatures = connections.map(conn => {
             const a = nodeMap[conn.from], b = nodeMap[conn.to];
             if (!a || !b) return null;
@@ -285,7 +373,6 @@ function initializeMap() {
             }
         });
 
-        // Build node points as GeoJSON
         const nodeFeatures = networkNodes.map(node => ({
             type: 'Feature',
             properties: {
@@ -297,19 +384,13 @@ function initializeMap() {
 
         map.addSource('nodes', { type: 'geojson', data: { type: 'FeatureCollection', features: nodeFeatures } });
 
-        // Outer glow
         map.addLayer({
             id: 'node-glow',
             type: 'circle',
             source: 'nodes',
-            paint: {
-                'circle-radius': 10,
-                'circle-color': '#4ecdc4',
-                'circle-opacity': 0.15
-            }
+            paint: { 'circle-radius': 10, 'circle-color': '#4ecdc4', 'circle-opacity': 0.15 }
         });
 
-        // Main node circles
         map.addLayer({
             id: 'node-circles',
             type: 'circle',
@@ -323,7 +404,6 @@ function initializeMap() {
             }
         });
 
-        // Node labels
         map.addLayer({
             id: 'node-labels',
             type: 'symbol',
@@ -335,50 +415,41 @@ function initializeMap() {
                 'text-anchor': 'top',
                 'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Regular']
             },
-            paint: {
-                'text-color': '#ffffff',
-                'text-halo-color': 'rgba(0,0,0,0.7)',
-                'text-halo-width': 1
-            }
+            paint: { 'text-color': '#ffffff', 'text-halo-color': 'rgba(0,0,0,0.7)', 'text-halo-width': 1 }
         });
 
-        // Popup on click
         map.on('click', 'node-circles', function(e) {
-            const p = e.features[0].properties;
-            const nodeConns = connections.filter(c => c.from === p.code || c.to === p.code);
-            const connHtml = nodeConns.map(c => {
-                const target = c.from === p.code ? c.to : c.from;
-                const targetNode = nodeMap[target];
-                return '<li>' + targetNode.name + ' (' + c.latency + ')</li>';
-            }).join('');
-
-            const html = '<div style="min-width:200px;">' +
-                '<h3 style="margin:0 0 10px 0;color:#333;">' + p.code + ' - ' + p.name + '</h3>' +
-                '<p style="margin:5px 0;"><strong>Country:</strong> ' + p.country + '</p>' +
-                '<p style="margin:5px 0;"><strong>Type:</strong> ' + p.type + '</p>' +
-                '<p style="margin:5px 0;"><strong>Providers:</strong> ' + p.providers + '</p>' +
-                (connHtml ? '<p style="margin:10px 0 5px 0;"><strong>Connections:</strong></p><ul style="margin:0;padding-left:20px;">' + connHtml + '</ul>' : '') +
-                '</div>';
-
-            new mapboxgl.Popup({ offset: 15 })
-                .setLngLat(e.features[0].geometry.coordinates)
-                .setHTML(html)
-                .addTo(map);
+            const code = e.features[0].properties.code;
+            selectNode(code);
         });
 
-        // Cursor style
         map.on('mouseenter', 'node-circles', function() { map.getCanvas().style.cursor = 'pointer'; });
         map.on('mouseleave', 'node-circles', function() { map.getCanvas().style.cursor = ''; });
+    }
+
+    map.on('load', function() {
+        addMapLayers();
 
         // Legend
         const legend = document.createElement('div');
-        legend.className = 'mapboxgl-ctrl mapboxgl-ctrl-group';
-        legend.style.cssText = 'padding:10px;background:rgba(15,20,30,0.9);border-radius:8px;font-size:12px;line-height:20px;color:#fff;';
+        legend.className = 'mapboxgl-ctrl mapboxgl-ctrl-group map-legend';
+        legend.style.cssText = 'padding:10px;border-radius:8px;font-size:12px;line-height:20px;';
         legend.innerHTML = '<div style="font-weight:bold;margin-bottom:4px;">Node Types</div>' +
             '<div><span style="color:#4ecdc4;">●</span> Main Node</div>' +
             '<div><span style="color:#45b7d1;">●</span> PoP Node</div>';
         document.getElementById('mapid').appendChild(legend);
     });
+
+    // Theme switching
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+            if (m.attributeName === 'data-theme' && map.isStyleLoaded()) {
+                map.setStyle(getMapStyle());
+                map.once('style.load', function() { addMapLayers(); });
+            }
+        });
+    });
+    observer.observe(document.documentElement, { attributes: true });
 }
 
 // Looking Glass functionality

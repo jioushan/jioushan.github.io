@@ -91,8 +91,16 @@
             <div class="container">
                 <h2>Network Map</h2>
                 <p class="map-description">Explore our global network node distribution</p>
-                <div class="map-container">
-                    <div id="mapid" style="height: 500px; width: 100%; border-radius: 15px; overflow: hidden;"></div>
+                <div class="map-wrapper">
+                    <aside id="map-sidebar">
+                        <div class="sidebar-header">
+                            <h3>Nodes</h3>
+                        </div>
+                        <div id="sidebar-content"></div>
+                    </aside>
+                    <div class="map-container">
+                        <div id="mapid"></div>
+                    </div>
                 </div>
             </div>
         </section>
