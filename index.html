@@ -163,13 +163,6 @@
     </div>
 
     <script src="script.js"></script>
-    <script>
-        document.getElementById('footer-year').textContent = new Date().getFullYear();
-        fetch('https://api.github.com/repos/jioushan/jioushan.github.io/commits?per_page=1')
-            .then(function(r){return r.json()})
-            .then(function(d){if(d[0])document.getElementById('footer-commit').textContent=d[0].sha.substring(0,7)})
-            .catch(function(){});
-    </script>
     <script data-ad-client="ca-pub-5267663113337080" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <footer>
         <div class="container">
@@ -188,8 +181,8 @@
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Contact Information</h4>
-                    <p>Email: admin@jsmsr.com</p>
+                    <h4>Ticket System</h4>
+                    <p><a href="https://web.ticket.jsmsr.com" target="_blank" rel="noopener">Submit a Ticket</a></p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -202,5 +195,12 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+        fetch('https://api.github.com/repos/jioushan/jioushan.github.io/commits?per_page=1')
+            .then(function(r){return r.json()})
+            .then(function(d){if(d[0])document.getElementById('footer-commit').textContent=d[0].sha.substring(0,7)})
+            .catch(function(){});
+    </script>
 </body>
 </html>
