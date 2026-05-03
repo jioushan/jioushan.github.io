@@ -131,28 +131,20 @@ function initializeNavigation() {
 
 // Scroll effects
 function initializeScrollEffects() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                
-                // Animate elements with delay for staggered effect
-                const animateElements = entry.target.querySelectorAll('.animate-on-scroll');
-                animateElements.forEach((element, index) => {
-                    element.style.transitionDelay = `${index * 0.1}s`;
-                    element.classList.add('visible');
+                // Stagger child animations
+                const children = entry.target.querySelectorAll('.feature-card, .stat-item');
+                children.forEach((el, i) => {
+                    el.style.transitionDelay = (i * 0.12) + 's';
                 });
             }
         });
-    }, observerOptions);
-    
-    // Observe sections
-    document.querySelectorAll('section').forEach(section => {
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+    document.querySelectorAll('section:not(.home-section)').forEach(section => {
         observer.observe(section);
     });
     
@@ -235,8 +227,13 @@ function initializeMap() {
     }
 
     function createCurve(from, to) {
-        const mid = [(from[0] + to[0]) / 2, (from[1] + to[1]) / 2];
-        const dx = to[0] - from[0], dy = to[1] - from[1];
+        // Handle date line crossing
+        let x0 = from[0], x1 = to[0];
+        if (Math.abs(x1 - x0) > 180) {
+            if (x0 < x1) x0 += 360; else x1 += 360;
+        }
+        const mid = [(x0 + x1) / 2, (from[1] + to[1]) / 2];
+        const dx = x1 - x0, dy = to[1] - from[1];
         const dist = Math.sqrt(dx * dx + dy * dy);
         const curve = Math.min(dist * 0.15, 20);
         mid[0] += -dy * 0.001 * curve;
@@ -244,10 +241,9 @@ function initializeMap() {
         const pts = [];
         for (let i = 0; i <= 50; i++) {
             const t = i / 50;
-            pts.push([
-                Math.pow(1-t,2)*from[0] + 2*(1-t)*t*mid[0] + t*t*to[0],
-                Math.pow(1-t,2)*from[1] + 2*(1-t)*t*mid[1] + t*t*to[1]
-            ]);
+            let lng = Math.pow(1-t,2)*x0 + 2*(1-t)*t*mid[0] + t*t*x1;
+            if (lng > 180) lng -= 360;
+            pts.push([lng, Math.pow(1-t,2)*from[1] + 2*(1-t)*t*mid[1] + t*t*to[1]]);
         }
         return pts;
     }
