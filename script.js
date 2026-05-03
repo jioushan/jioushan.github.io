@@ -586,7 +586,7 @@ function initializeStats() {
     statNumbers.forEach(stat => observer.observe(stat));
 }
 
-// Particle system with interactive ripple
+// Particle network with interactive ripple
 function initializeParticles() {
     const canvas = document.getElementById('particles');
     if (!canvas) return;
@@ -599,20 +599,43 @@ function initializeParticles() {
     resize();
     window.addEventListener('resize', resize);
 
-    const count = 80;
+    const count = 100;
     const particles = [];
+    // create nodes with random connections to form a web-like topology
     for (let i = 0; i < count; i++) {
         particles.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
             ox: 0, oy: 0,
-            r: Math.random() * 2 + 1,
-            vx: (Math.random() - 0.5) * 0.3,
-            vy: (Math.random() - 0.5) * 0.3,
-            alpha: Math.random() * 0.5 + 0.2
+            r: Math.random() * 1.5 + 0.5,
+            vx: (Math.random() - 0.5) * 0.15,
+            vy: (Math.random() - 0.5) * 0.15,
+            alpha: Math.random() * 0.3 + 0.15,
+            links: []
         });
     }
     particles.forEach(p => { p.ox = p.x; p.oy = p.y; });
+
+    // build spider-web connections: each node connects to 2-4 nearest neighbors
+    for (let i = 0; i < particles.length; i++) {
+        const dists = [];
+        for (let j = 0; j < particles.length; j++) {
+            if (i === j) continue;
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            dists.push({ j, d: Math.sqrt(dx * dx + dy * dy) });
+        }
+        dists.sort((a, b) => a.d - b.d);
+        const linkCount = 2 + Math.floor(Math.random() * 3); // 2-4 links
+        for (let k = 0; k < linkCount && k < dists.length; k++) {
+            if (!particles[i].links.includes(dists[k].j)) {
+                particles[i].links.push(dists[k].j);
+            }
+            if (!particles[dists[k].j].links.includes(i)) {
+                particles[dists[k].j].links.push(i);
+            }
+        }
+    }
 
     const mouse = { x: -9999, y: -9999, active: false };
 
@@ -638,40 +661,51 @@ function initializeParticles() {
                 const dx = p.x - mouse.x;
                 const dy = p.y - mouse.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 120) {
-                    const force = (120 - dist) / 120 * 2;
+                if (dist < 150) {
+                    const force = (150 - dist) / 150 * 2;
                     p.vx += (dx / dist) * force * 0.3;
                     p.vy += (dy / dist) * force * 0.3;
                 }
             }
-            p.vx += (p.ox - p.x) * 0.01;
-            p.vy += (p.oy - p.y) * 0.01;
-            p.vx *= 0.96;
-            p.vy *= 0.96;
+            p.vx += (p.ox - p.x) * 0.008;
+            p.vy += (p.oy - p.y) * 0.008;
+            p.vx *= 0.97;
+            p.vy *= 0.97;
             p.x += p.vx;
             p.y += p.vy;
+        }
 
+        // draw web connections
+        const drawn = new Set();
+        for (let i = 0; i < particles.length; i++) {
+            const a = particles[i];
+            for (const j of a.links) {
+                const key = i < j ? i + '-' + j : j + '-' + i;
+                if (drawn.has(key)) continue;
+                drawn.add(key);
+                const b = particles[j];
+                const dx = a.x - b.x;
+                const dy = a.y - b.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                const baseAlpha = 0.08 * (1 - dist / 400);
+                if (baseAlpha <= 0) continue;
+                ctx.beginPath();
+                ctx.moveTo(a.x, a.y);
+                ctx.lineTo(b.x, b.y);
+                ctx.strokeStyle = 'rgba(255,255,255,' + Math.max(0, baseAlpha * 0.5) + ')';
+                ctx.lineWidth = 0.3;
+                ctx.stroke();
+            }
+        }
+
+        // draw nodes
+        for (const p of particles) {
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
             ctx.fillStyle = 'rgba(255,255,255,' + p.alpha + ')';
             ctx.fill();
         }
-        // draw lines between nearby particles
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 100) {
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = 'rgba(255,255,255,' + (0.15 * (1 - dist / 100)) + ')';
-                    ctx.lineWidth = 0.5;
-                    ctx.stroke();
-                }
-            }
-        }
+
         requestAnimationFrame(draw);
     }
     draw();
