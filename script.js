@@ -9,12 +9,12 @@ function initializeApp() {
     initializeTheme();
     initializeNavigation();
     initializeScrollEffects();
-    initializeMap();
+    try { initializeMap(); } catch(e) { console.error('Map init failed:', e); }
     initializeLookingGlass();
     initializeStats();
     initializeParticles();
     initializeBackToTop();
-    
+
     // Remove loading screen after everything is loaded
     setTimeout(() => {
         hideLoadingScreen();
@@ -183,7 +183,7 @@ function initializeScrollEffects() {
 
 // Mapbox GL JS initialization
 function initializeMap() {
-    if (!document.getElementById('mapid')) return;
+    if (!document.getElementById('mapid') || typeof mapboxgl === 'undefined') return;
 
     mapboxgl.accessToken = 'pk.eyJ1IjoiamlvdXNoYW4iLCJhIjoiY21vcTN0ZWp6MXhhYjJybmNnNmEwa2ZwbyJ9.VpuJK_3oT4w-2qKM3DY_xw';
 
@@ -196,7 +196,7 @@ function initializeMap() {
     const map = new mapboxgl.Map({
         container: 'mapid',
         style: getMapStyle(),
-        center: [140, 25],
+        center: [180, 25],
         zoom: 2.2,
         projection: 'mercator'
     });
