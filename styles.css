@@ -198,12 +198,26 @@ header .container {
 /* Home section */
 .home-section {
     height: 100vh;
-    background: var(--gradient-1);
+    background: linear-gradient(-45deg, #667eea, #764ba2, #4c51bf, #553c9a, #667eea);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
+}
+
+[data-theme="dark"] .home-section {
+    background: linear-gradient(-45deg, #4c51bf, #553c9a, #312e81, #4c1d95, #4c51bf);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 #particles {
