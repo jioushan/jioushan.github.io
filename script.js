@@ -177,6 +177,16 @@ function initializeScrollEffects() {
 function initializeMap() {
     if (!document.getElementById('mapid') || typeof mapboxgl === 'undefined') return;
 
+    // Check WebGL support
+    try {
+        const canvas = document.createElement('canvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        if (!gl) throw new Error('no webgl');
+    } catch(e) {
+        document.getElementById('mapid').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-size:0.9rem;">Map requires WebGL support</div>';
+        return;
+    }
+
     mapboxgl.accessToken = 'pk.eyJ1IjoiamlvdXNoYW4iLCJhIjoiY21vcTN0ZWp6MXhhYjJybmNnNmEwa2ZwbyJ9.VpuJK_3oT4w-2qKM3DY_xw';
 
     function getMapStyle() {
@@ -227,7 +237,7 @@ function initializeMap() {
     }
 
     function createCurve(from, to) {
-        // Handle date line crossing
+        // Handle date line crossing: shift to continuous coords
         let x0 = from[0], x1 = to[0];
         if (Math.abs(x1 - x0) > 180) {
             if (x0 < x1) x0 += 360; else x1 += 360;
@@ -242,10 +252,23 @@ function initializeMap() {
         for (let i = 0; i <= 50; i++) {
             const t = i / 50;
             let lng = Math.pow(1-t,2)*x0 + 2*(1-t)*t*mid[0] + t*t*x1;
-            if (lng > 180) lng -= 360;
+            // Normalize back to -180..180
+            while (lng > 180) lng -= 360;
+            while (lng < -180) lng += 360;
             pts.push([lng, Math.pow(1-t,2)*from[1] + 2*(1-t)*t*mid[1] + t*t*to[1]]);
         }
-        return pts;
+        // Split at antimeridian to prevent Mapbox wrapping
+        const segments = [[]];
+        for (let i = 0; i < pts.length; i++) {
+            segments[segments.length - 1].push(pts[i]);
+            if (i < pts.length - 1) {
+                const dLng = Math.abs(pts[i+1][0] - pts[i][0]);
+                if (dLng > 180) {
+                    segments.push([]);
+                }
+            }
+        }
+        return segments;
     }
 
     // Sidebar
@@ -346,15 +369,21 @@ function initializeMap() {
 
     // Map layers
     function addMapLayers() {
-        const lineFeatures = connections.map(conn => {
+        const lineFeatures = [];
+        connections.forEach(conn => {
             const a = nodeMap[conn.from], b = nodeMap[conn.to];
-            if (!a || !b) return null;
-            return {
-                type: 'Feature',
-                properties: { from: conn.from, to: conn.to, latency: conn.latency },
-                geometry: { type: 'LineString', coordinates: createCurve([a.lng, a.lat], [b.lng, b.lat]) }
-            };
-        }).filter(Boolean);
+            if (!a || !b) return;
+            const segments = createCurve([a.lng, a.lat], [b.lng, b.lat]);
+            segments.forEach(seg => {
+                if (seg.length >= 2) {
+                    lineFeatures.push({
+                        type: 'Feature',
+                        properties: { from: conn.from, to: conn.to, latency: conn.latency },
+                        geometry: { type: 'LineString', coordinates: seg }
+                    });
+                }
+            });
+        });
 
         map.addSource('connections', { type: 'geojson', data: { type: 'FeatureCollection', features: lineFeatures } });
         map.addLayer({
