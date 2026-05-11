@@ -9,17 +9,16 @@
 ## Organizations
 [JSMSR NetWork](https://www.peeringdb.com/org/28213)
 
-
 access our network
-For other regions, please send an email to [admin@jsmsr.com](mailto:admin@jsmsr.com)
+For other regions, please send email to [admin@jsmsr.com](mailto:admin@jsmsr.com)
 
 ##  AS-SET
 AS-SET: AS-JSMSR
-Wosie:ARIN,RIPE
+Whois:ARIN,RIPE
 ASN: 12198
 
 ## LookGlass
-plz wating;
+[MTR LookingGlass](https://lg.jsmsr.com/)
 
 location:Asia
 
@@ -27,14 +26,15 @@ location:Asia
 
 | ASN               |   Name   |
 |---------------------|----------|
-| AS44324      | MoeDove LLC  | 
-| AS6939       | Hurricane Electric LLC   | 
-| AS206628       | Eric Net  | 
-| AS139317       | Ningbo Dahuamao  |
-| AS140915     | Xiang Xuanchen  |
-| AS209533       | iFog GmbH  |
+| AS44324      | MoeDove LLC  |
+| AS6939       | Hurricane Electric LLC   |
+| AS206628       | Eric Net  |
+| AS139317       | Ningbo Dahuamao Information Technology Co Ltd |
+| AS216211 | CYBERVERSE LLC |
+| AS17433   | Hytron Network Services Limited |
 | AS393577      | Tritan Development  |
-| AS134835      | Starry Network Limited  |
+| AS38074 | SDCC Japan-West |
+| AS59105 | Home NOC Operators Group |
 
 JSMSR Network Operates our Global network
 
@@ -47,12 +47,13 @@ Learn more about our services!
 
 We provide IPT (Only IPV6) at our following locations
 
-| Country             |   Area        |    Location    |
-|---------------------|---------------|----------------|
-| Asia                | HongKong      |    HongKong    |
-| Asia                | Japan         |  OOSaka        |
-| United States       | Missouri      | Kansas City    |
-| Singapore           | -----------   | -----------    |
+| Country       | Area       | Location    |
+| ------------- | ---------- | ----------- |
+| Asia          | HongKong   | HongKong    |
+| Asia          | Japan      | ŌSaka       |
+| Asia          | Singapore  | Singapore   |
+| United States | California | San José    |
+| United States | Missouri   | Kansas City |
 
 Please fill out this [form](https://forms.gle/sFqpNTaWgsFxX7jk6) 
 
