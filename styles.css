@@ -40,8 +40,12 @@
     --gradient-3: linear-gradient(135deg, #3182ce 0%, #0bc5ea 100%);
 }
 
-/* All elements transition smoothly between themes */
-*, *::before, *::after {
+/* Theme transitions on key elements only */
+header, nav, .nav-link, .feature-card, .stat-item, .lg-input, .lg-button,
+.lg-results, .trace-row, .trace-data, .map-wrapper, #map-sidebar, .node-item,
+.theme-controls, .control-btn, footer, .footer-section a, .error-result,
+.loading-indicator, .step, .raw-data summary, .conn-item, .node-detail,
+.sidebar-header, #dot-map-container, .lg-section, .map-section {
     transition: background-color var(--transition),
                 color var(--transition),
                 border-color var(--transition),
@@ -277,20 +281,17 @@ header .container {
     font-size: 4rem;
     font-weight: 700;
     margin-bottom: 10px;
-    opacity: 1;
 }
 
 .banner-content > p {
     font-size: 2rem;
     font-weight: 300;
     margin-bottom: 20px;
-    opacity: 1;
 }
 
 .subtitle {
     font-size: 1.2rem !important;
     margin-bottom: 40px !important;
-    opacity: 1;
 }
 
 .btn {
@@ -305,7 +306,6 @@ header .container {
     font-size: 1.1rem;
     transition: var(--transition);
     backdrop-filter: blur(10px);
-    opacity: 1;
 }
 
 .btn:hover {
@@ -313,7 +313,6 @@ header .container {
     border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    opacity: 1;
 }
 
 .animate-text {
@@ -944,8 +943,9 @@ header .container {
 }
 
 .placeholder-icon {
-    font-size: 3rem;
     margin-bottom: 20px;
+    color: var(--text-dark);
+    opacity: 0.4;
 }
 
 /* Loading Animation */

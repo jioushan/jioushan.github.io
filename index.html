@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSMSR Network</title>
     <link rel="stylesheet" href="styles.css">
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
     <link rel="icon" href="https://www.jsmsr.com/v3/assets/img/favicon.svg" type="image/x-icon">
     <meta property="og:image" content="https://www.jsmsr.com/v3/assets/img/favicon.svg">
     <meta name="description" content="JSMSR Network - Professional Network Infrastructure Provider">
     <meta property="og:title" content="JSMSR Network">
     <meta property="og:description" content="JSMSR Network - Professional Network Infrastructure Provider">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.jsmsr.com/">
 </head>
 <body>
     <div class="loading-screen" id="loading-screen">
@@ -26,11 +25,11 @@
                 JSMSR Network
             </div>
             <nav>
-                <div class="menu-toggle" id="menu-toggle">
+                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
                 <ul class="nav-links" id="nav-links">
                     <li><a href="https://www.jsmsr.com" class="nav-link">Home</a></li>
                     <li><a href="#map" class="nav-link">Map</a></li>
@@ -130,7 +129,7 @@
                     </div>
                     <div class="lg-results" id="lg-results">
                         <div class="results-placeholder">
-                            <div class="placeholder-icon">🔍</div>
+                            <div class="placeholder-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="48" height="48"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
                             <p>Enter an IP address or domain to start network diagnostics</p>
                         </div>
                     </div>
@@ -179,8 +178,6 @@
         </button>
     </div>
 
-    <script src="script.js"></script>
-    <script data-ad-client="ca-pub-5267663113337080" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -214,6 +211,8 @@
             </div>
         </div>
     </footer>
+    <script src="script.js"></script>
+    <script data-ad-client="ca-pub-5267663113337080" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
         document.getElementById('footer-year').textContent = new Date().getFullYear();
         fetch('https://api.github.com/repos/jioushan/jioushan.github.io/commits?per_page=1')

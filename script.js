@@ -81,16 +81,7 @@ function toggleTheme() {
 function updateThemeIcon(theme) {
     const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
-        const sunIcon = themeToggle.querySelector('.sun-icon');
-        const moonIcon = themeToggle.querySelector('.moon-icon');
-        
-        if (theme === 'dark') {
-            sunIcon.style.display = 'block';
-            moonIcon.style.display = 'none';
-        } else {
-            sunIcon.style.display = 'none';
-            moonIcon.style.display = 'block';
-        }
+        themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
     }
 }
 
@@ -101,8 +92,9 @@ function initializeNavigation() {
     
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+            const isActive = navLinks.classList.toggle('active');
             menuToggle.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', isActive);
         });
     }
     
@@ -173,9 +165,43 @@ function initializeScrollEffects() {
     });
 }
 
-// Mapbox GL JS initialization
+// Mapbox GL JS initialization (lazy loaded)
 function initializeMap() {
-    if (!document.getElementById('mapid') || typeof mapboxgl === 'undefined') return;
+    const mapSection = document.querySelector('.map-section');
+    if (!mapSection || !document.getElementById('mapid')) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                observer.disconnect();
+                loadMapboxAndInit();
+            }
+        });
+    }, { rootMargin: '200px' });
+    observer.observe(mapSection);
+}
+
+function loadMapboxAndInit() {
+    // Load Mapbox CSS
+    const link = document.createElement('link');
+    link.href = 'https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css';
+    link.rel = 'stylesheet';
+    document.head.appendChild(link);
+
+    // Load Mapbox JS
+    const script = document.createElement('script');
+    script.src = 'https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js';
+    script.onload = function() {
+        initMapContent();
+    };
+    script.onerror = function() {
+        document.getElementById('mapid').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-size:0.9rem;">Failed to load map</div>';
+    };
+    document.head.appendChild(script);
+}
+
+function initMapContent() {
+    if (typeof mapboxgl === 'undefined') return;
 
     // Check WebGL support
     try {
@@ -506,9 +532,12 @@ function initializeLookingGlass() {
         `;
         
         try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 30000);
             const response = await fetch(`https://mtr.api.jsmsr.eu.org/mtr?ip=${encodeURIComponent(target)}`, {
-                timeout: 30000 // 30 second timeout
+                signal: controller.signal
             });
+            clearTimeout(timeoutId);
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -522,7 +551,7 @@ function initializeLookingGlass() {
             console.error('Trace error:', error);
             
             // Only show IPv6 message if timeout or network error after 30 seconds
-            if (error.name === 'TypeError' || error.message.includes('timeout') || error.message.includes('fetch')) {
+            if (error.name === 'TypeError' || error.name === 'AbortError' || error.message.includes('fetch')) {
                 lgResults.innerHTML = `
                     <div class="error-result">
                         <h3>🌐 IPv6 Network Required</h3>
@@ -673,14 +702,15 @@ function initializeStats() {
         const duration = 2000;
         const increment = target / (duration / 16);
         let current = 0;
-        
+        const isDecimal = target % 1 !== 0;
+
         const timer = setInterval(() => {
             current += increment;
             if (current >= target) {
                 current = target;
                 clearInterval(timer);
             }
-            element.textContent = Math.floor(current);
+            element.textContent = isDecimal ? current.toFixed(2) : Math.floor(current);
         }, 16);
     };
     
@@ -702,6 +732,12 @@ function initializeParticles() {
     const canvas = document.getElementById('particles');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    let isVisible = true;
+
+    const visibilityObserver = new IntersectionObserver((entries) => {
+        isVisible = entries[0].isIntersecting;
+    });
+    visibilityObserver.observe(canvas);
 
     function resize() {
         canvas.width = canvas.offsetWidth;
@@ -766,6 +802,10 @@ function initializeParticles() {
     canvas.addEventListener('touchend', onLeave);
 
     function draw() {
+        if (!isVisible) {
+            requestAnimationFrame(draw);
+            return;
+        }
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (const p of particles) {
             if (mouse.active) {
